@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@layer base {
+  html {
+    font-family: "Dm Sans", sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-onBackground text-[18px] leading-[1.5];
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a,
+  i,
+  img,
+  span,
+  iframe,
+  button {
+    display: block;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  img {
+    height: auto;
+  }
+
+  input,
+  button {
+    @apply border-none bg-none text-inherit;
+    font: inherit;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    @apply text-left cursor-pointer p-4;
+  }
+
+  /* Animation */
+  :focus-visible {
+    @apply outline-primaryVariant;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-banner rounded-lg;
+  }
+}
+
+@layer components {
+  .loading-icon {
+    @apply absolute right-0 top-1/2 translate-y-[-50%] opacity-50 p-2 text-xl;
+  }
+
+  .loading {
+    animation: spinner 1s linear infinite;
+  }
+
+  .search-fade-in {
+    animation: searchFadeIn 0.7s ease-in-out;
+  }
+
+  @keyframes spinner {
+    from {
+      transform: translateY(-50%) rotate(0);
+    }
+    to {
+      transform: translateY(-50%) rotate(1turn);
+    }
+  }
+
+  @keyframes searchFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .btn-bg {
+    @apply h-12 w-12 leading-[48px] text-center rounded-lg bg-banner cursor-pointer text-lg  mobile:hidden;
+  }
+
+  .sidebar-list {
+    @apply grid gap-2 desktop:px-14 px-9;
+  }
+
+  .genere-list {
+    @apply text-onSurfaceVariant transition-short hover:text-white;
+  }
+
+  .h-sidebar-dk {
+    height: calc(100dvh - 104px);
+  }
+
+  .h-sidebar {
+    height: calc(100dvh - 96px);
+  }
+
+  .border-sidebar {
+    @apply border-t-[1px] border-t-banner border-solid;
+  }
+  /* .heading,
+  .title-large,
+  .title {
+    @apply font-bold tracking-[0.5px];
+  } */
+
+  /* .title {
+    @apply text-title;
+  }
+
+  .heading {
+    @apply text-white text-heading leading-[1.2];
+  }
+
+  .title-large {
+    @apply text-titleLg;
+  }
+
+  .img-cover {
+    @apply w-full h-full object-cover;
+  }
+
+  .meta-list {
+    @apply flex flex-wrap justify-start items-center gap-3;
+  }
+
+  .meta-item {
+    @apply flex items-center gap-1;
+  }
+
+  .btn {
+    @apply text-white text-button font-bold max-w-max flex items-center gap-3 rounded-lg py-3 pl-5 pr-6;
+    transition: 250ms ease;
+  }
+
+  .card-badge {
+    @apply bg-banner text-white text-label font-bold rounded-[4px] px-[6px];
+  }
+
+  .poster-box {
+    background-image: url("./assets/images/poster-bg-icon.png");
+    aspect-ratio: 2 / 3;
+  }
+
+  .poster-box,
+  .video-card {
+    @apply bg-no-repeat bg-center bg-banner rounded-2xl overflow-hidden;
+    background-size: 50px;
+  }
+
+  .title-wrapper {
+    @apply mb-6;
+  }
+
+  .slider-list {
+    @apply mx-[-20px] pb-4 mb-[-16px];
+    overflow-x: overlay;
+  }
+
+  .slider-list::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+
+  .slider-list:is(:hover, :focus-within)::-webkit-scrollbar-thumb {
+    @apply bg-banner;
+  }
+
+  .slider-list::-webkit-scrollbar-button {
+    width: 20px;
+  }
+
+  .slider-list .slider-inner {
+    @apply relative flex gap-4;
+  }
+
+  .slider-list .slider-inner::before,
+  .slider-list .slider-inner::after {
+    content: "";
+    min-width: 4px;
+  }
+
+  .separator {
+    @apply w-1 h-1 bg-whiteAlpha20 rounded-lg;
+  }
+
+  .video-card {
+    @apply aspect-[16/9] flex-shrink-0 max-w-[500px] w-[calc(100%-40px)];
+    background-image: url("./assets/images/video-bg-icon.png");
+  }
+
+  /* .container::after, */
+  /* .search-modal::after {
+    @apply fixed bottom-0 left-0 w-full h-[150px] z-[1] pointer-events-none;
+    content: "";
+    background-image: linear-gradient(var(--bottom-overlay));
+  }  */
+}
+
+@layer utilities {
+  .boxshadow-searchfield:focus {
+    box-shadow: 0 0 0 2px hsla(250, 100%, 95%, 1);
+  }
+
+  .transition-short {
+    transition: 250ms ease;
+  }
+
+  .transition-long {
+    transition: 500ms ease;
+  }
+
+  .overflow-y-overlay {
+    overflow-y: overlay;
+  }
+}
