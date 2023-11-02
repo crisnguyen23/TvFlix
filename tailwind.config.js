@@ -3,15 +3,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      mobile: "768px",
-      desktop: "1200px",
+      tablet: "768px",
+      desktop: "1280px",
     },
     extend: {
       colors: {
         primary: "hsla(349, 100%, 43%, 1)",
         primaryVariant: "hsla(349, 69%, 51%, 1)",
         ratingColor: "hsla(44, 100%, 49%, 1)",
-        surface: "hsla(250, 100%, 95%, 1)",
+        surface: "hsla(250, 13%, 11%, 1)",
         textColor: "hsla(250, 2%, 59%, 1)",
         background: "hsla(220, 17%, 7%, 1)",
         onBackground: "hsla(220, 100%, 95%, 1)",
@@ -21,8 +21,6 @@ export default {
         onSurfaceVariant: "hsla(250, 1%, 44%, 1)",
 
         // Gradient colors
-        bannerOverlay:
-          "90deg, hsl(220, 17%, 7%) 0%, hsla(220, 17%, 7%, 0.5) 100%",
         bottomOverlay: "180deg, hsla(250, 13%, 11%, 0), hsla(250, 13%, 11%, 1)",
       },
       boxShadow: {

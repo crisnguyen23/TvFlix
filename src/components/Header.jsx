@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import logo from "../assets/logos/logo.svg";
 import Search from "./Search";
-import Sidebar from "./Sidebar";
 
 const Header = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -23,18 +22,18 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="header relative desktop:py-7 desktop:px-14 py-6 px-4 flex justify-between items-center gap-2">
+    <header className="header relative flex items-center justify-between gap-2 px-4 py-6 desktop:px-14 desktop:py-7">
       {!showSearchBar && (
         <>
           <Link to="/" className="logo mr-auto">
             <img
               src={logo}
               alt="TvFlix home"
-              className="desktop:w-40 w-[140px]"
+              className="w-[140px] desktop:w-40"
             />
           </Link>
           <div
-            className="group btn-bg"
+            className="btn-bg group"
             onClick={() => {
               setShowSearchBar(true);
             }}
@@ -43,7 +42,7 @@ const Header = () => {
           </div>
 
           <div
-            className="desktop:hidden max-desktop:order-3 h-12 w-12 leading-[48px] text-center cursor-pointer hover:opacity-60"
+            className="h-12 w-12 cursor-pointer text-center leading-[48px] hover:opacity-60 max-desktop:order-3 desktop:hidden"
             onClick={() => setShowSideBar(!showSideBar)}
           >
             <i className="fa-solid fa-bars text-[24px]"></i>
@@ -51,17 +50,17 @@ const Header = () => {
         </>
       )}
 
-      <div className="max-mobile:hidden">
+      <div className="max-tablet:hidden">
         <Search size={"360px"} />
       </div>
 
       {showSearchBar && (
-        <div className="mobile:hidden flex-1 flex">
+        <div className="tablet:hidden flex flex-1">
           <div className="inline-block flex-1">
             <Search size={"100%"} focus={showSearchBar} />
           </div>
           <div
-            className="group btn-bg inline-block ml-2 search-fade-in"
+            className="btn-bg group ml-2 inline-block"
             onClick={() => {
               setShowSearchBar(false);
             }}

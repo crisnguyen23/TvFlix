@@ -1,29 +1,28 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Header, Sidebar } from "./components";
 import {
-  Header,
   Home,
-  MovieGenre,
+  MovieGenreList,
+  MovieSearchList,
   MovieDetail,
-  MovieSearch,
   PageNotFound,
-} from "./components";
+} from "./pages";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Header />
-        <section>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/moviegenre" element={<MovieGenre />} />
-            <Route path="/moviesearch" element={<MovieSearch />} />
-            <Route path="/movie/:id" element={<MovieDetail />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </section>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Header />
+      <main className="desktop:grid-cols-main desktop:grid">
+        <Sidebar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/moviegenrelist" element={<MovieGenreList />} />
+          <Route path="/moviesearch" element={<MovieSearchList />} />
+          <Route path="/movie/:id" element={<MovieDetail />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 
