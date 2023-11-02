@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import copyrighticon from "../assets/icons/copyright-sign.svg";
+import { copyrighticon } from "../assets/icons";
 import logoTMDB from "../assets/logos/tmdb-logo.svg";
 
 const Sidebar = () => {
