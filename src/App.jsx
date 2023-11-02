@@ -16,6 +16,7 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/TvFlix/" element={<Home />} />
           <Route path="/moviegenrelist" element={<MovieGenreList />} />
           <Route path="/moviesearch" element={<MovieSearchList />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
