@@ -29,8 +29,8 @@ export const fetchMovieListGenre = createAsyncThunk(
   },
 );
 
-export const fetchMovieNowPlaying = createAsyncThunk(
-  "movies/fetchMovieNowPlaying",
+export const fetchMoviePopular = createAsyncThunk(
+  "movies/fetchMoviePopular",
   async () => {
     const res = await tmdbAPI.get(`/movie/popular`, {
       params: {
@@ -43,14 +43,14 @@ export const fetchMovieNowPlaying = createAsyncThunk(
   },
 );
 
-export const fetchMoviePopular = createAsyncThunk(
-  "movies/fetchMoviePopular",
+export const fetchMovieTrendingWeek = createAsyncThunk(
+  "movies/fetchMovieTrendingWeek",
   async () => {
-    const res = await tmdbAPI.get(`/movie/popular`, {
+    const res = await tmdbAPI.get(`/trending/movie/week`, {
       params: {
         api_key: APIKey,
         language: "en-US",
-        page: 3,
+        page: 1,
       },
     });
     return res.data.results;
@@ -143,13 +143,14 @@ export const fetchMovieSimilar = createAsyncThunk(
 const movieSlice = createSlice({
   name: "movies",
   initialState: {
+    loadingPage: "",
     status: "",
     searchResults: [],
     searchPage: [],
     genreList: [],
     movieList: [],
-    moviePlaying: [],
     moviePopular: [],
+    movieTrending: [],
     movieUpcoming: [],
     movieTopRated: [],
     movieDetail: [],
@@ -181,14 +182,21 @@ const movieSlice = createSlice({
       .addCase(fetchGenreList.fulfilled, (state, action) => {
         state.genreList = action.payload;
       })
+      // .addCase(fetchGenreList.fulfilled, (state, action) => {
+      //   state.loadingPage = false;
+      // })
       .addCase(fetchMovieListGenre.fulfilled, (state, action) => {
         state.movieList = action.payload;
       })
-      .addCase(fetchMovieNowPlaying.fulfilled, (state, action) => {
-        state.moviePlaying = action.payload;
+      .addCase(fetchMoviePopular.pending, (state) => {
+        state.loadingPage = false;
       })
       .addCase(fetchMoviePopular.fulfilled, (state, action) => {
         state.moviePopular = action.payload;
+        state.loadingPage = true;
+      })
+      .addCase(fetchMovieTrendingWeek.fulfilled, (state, action) => {
+        state.movieTrending = action.payload;
       })
       .addCase(fetchMovieUpcoming.fulfilled, (state, action) => {
         state.movieUpcoming = action.payload;

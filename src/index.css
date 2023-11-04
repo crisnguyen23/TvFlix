@@ -84,10 +84,6 @@
     @apply absolute right-0 top-1/2 translate-y-[-50%] p-2 text-xl opacity-50;
   }
 
-  .loading {
-    animation: spinner 1s linear infinite;
-  }
-
   .search-hover {
     box-shadow: 0 0 0 2px hsla(250, 1%, 44%, 1);
   }
@@ -262,6 +258,16 @@
 }
 
 @layer utilities {
+  .loading {
+    animation: spinner 1s linear infinite;
+  }
+
+  .loading-page {
+    animation: spinner 1.5s linear infinite;
+    /* transform: translateX(-50%);
+    transform: translateY(-50%); */
+  }
+
   .boxshadow-searchfield:focus {
     box-shadow: 0 0 0 2px hsla(250, 100%, 95%, 1);
   }

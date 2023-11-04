@@ -1,18 +1,11 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Genre from "./Genre";
-import { fetchGenreList } from "../../redux/movieSlice";
 import logoTMDB from "../../assets/logos/tmdb-logo.svg";
 import copyrighticon from "../../assets/icons/copyright-sign.svg";
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
   const genreList = useSelector((state) => state.movies.genreList);
-
-  useEffect(() => {
-    dispatch(fetchGenreList());
-  }, []);
 
   return (
     <nav className="sidebar desktop:h-desktop h-tablet top-s[96px]  overflow-y-overlay transition-long absolute bottom-0 left-[-340px] z-[4] w-full max-w-[340px] bg-background desktop:static desktop:w-[250px] desktop:border-t-0">

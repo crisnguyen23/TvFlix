@@ -3,7 +3,10 @@ import MovieCard from "./MovieCard";
 const MovieListingSlider = ({ title, movieSlider }) => {
   return (
     <div className="movie-list pt-8">
-      <h3 className="mb-6 text-[26px] font-bold tracking-[0.5px]">{title}</h3>
+      <div>
+        <h3 className="mb-6 text-[26px] font-bold tracking-[0.5px]">{title}</h3>
+        <h3> See all movies</h3>
+      </div>
       <div className="slider-list slider-large">
         {movieSlider.length === 0 ? (
           <div className="mb-6 ml-8 h-[367px] text-[26px] font-bold tracking-[0.5px]">

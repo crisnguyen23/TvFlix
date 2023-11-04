@@ -22,10 +22,13 @@ const Banner = ({ data }) => {
     } = data[currentIndex];
 
     var genreChar = [];
-    genre_ids.forEach((id) => {
-      let genreFilter = genreList.find((genre) => genre.id === id);
-      genreChar.push(genreFilter.name);
-    });
+
+    if (genreList.length > 0) {
+      genre_ids.forEach((id) => {
+        let genreFilter = genreList.find((genre) => genre.id === id);
+        genreChar.push(genreFilter.name);
+      });
+    }
   }
 
   // const settings = {
@@ -37,7 +40,7 @@ const Banner = ({ data }) => {
   // };
   return (
     <>
-      {data.length === 0 ? (
+      {data.length === 0 || genreChar === 0 ? (
         <></>
       ) : (
         <div className="banner tablet:h-[500px] relative h-[700px] overflow-x-hidden rounded-3xl">

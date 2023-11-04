@@ -1,36 +1,21 @@
 import { useEffect } from "react";
 
+import { useSelector } from "react-redux";
 import Banner from "./Banner";
 import { MovieListingSlider } from "../../components";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchMovieNowPlaying,
-  fetchMoviePopular,
-  fetchMovieUpcoming,
-  fetchMovieTopRated,
-} from "../../redux/movieSlice";
-
 const Home = () => {
-  const dispatch = useDispatch();
-  const moviePlaying = useSelector((state) => state.movies.moviePlaying);
   const moviePopular = useSelector((state) => state.movies.moviePopular);
+  const movieTrending = useSelector((state) => state.movies.movieTrending);
   const movieUpcoming = useSelector((state) => state.movies.movieUpcoming);
   const movieTopRated = useSelector((state) => state.movies.movieTopRated);
 
-  useEffect(() => {
-    dispatch(fetchMovieNowPlaying());
-    dispatch(fetchMoviePopular());
-    dispatch(fetchMovieUpcoming());
-    dispatch(fetchMovieTopRated());
-  }, []);
-
   return (
     <div className="containerr">
-      <Banner data={moviePlaying.slice(0, 10)} />
+      <Banner data={moviePopular.slice(0, 10)} />
       <MovieListingSlider
         title={"Weekly Trending Movies"}
-        movieSlider={moviePopular}
+        movieSlider={movieTrending}
       />
       <MovieListingSlider
         title={"Upcoming Movies"}

@@ -57,7 +57,7 @@ const MovieDetail = () => {
     return () => {
       dispatch(removeMovieDetail());
     };
-  }, [dispatch, id]);
+  }, [id]);
 
   return (
     <div className="containerr">
@@ -123,7 +123,7 @@ const MovieDetail = () => {
                   Trailers and Clips
                 </h3>
               </div>
-              <div className="slider-large tablet:ml-0 rounded-2xl">
+              <div className="slider-large tablet:ml-0 ml-[2px] rounded-2xl">
                 <div className="slider-inner relative flex gap-4 ">
                   {filterVideos(videos.results)
                     .slice(0, 5)

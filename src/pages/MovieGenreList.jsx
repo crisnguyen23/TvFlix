@@ -23,7 +23,7 @@ const MovieGenreList = () => {
     return () => {
       dispatch(removeMovieList());
     };
-  }, [dispatch, id]);
+  }, [id]);
 
   console.log(id);
   return (
