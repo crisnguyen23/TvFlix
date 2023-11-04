@@ -155,8 +155,9 @@
   }
 
   .slider-item {
-    @apply w-[100px] flex-shrink-0 cursor-pointer rounded-lg brightness-50;
+    @apply w-[100px] flex-shrink-0 cursor-pointer rounded-lg brightness-100;
     transition: opacity 500ms ease;
+    box-shadow: 0 1px 4px hsla(0, 0%, 0%, 0.75);
   }
 
   .banner-slider .slider-item::before {
@@ -165,9 +166,13 @@
     inset: 0;
     background-image: linear-gradient(
       90deg,
-      hsl(220, 17%, 7%) 0%,
-      hsla(220, 17%, 7%, 0.5) 60%
+      hsl(237.1deg 17% 7%) 0%,
+      hsl(0deg 0% 100% / 8%) 60%
     );
+  }
+
+  .banner-content {
+    text-shadow: 0 0 2px #000;
   }
 
   .banner-text {

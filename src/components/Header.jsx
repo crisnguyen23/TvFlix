@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../assets/logos/logo.svg";
-import Search from "./Search";
+import Search from "./Search/Search";
 
 const Header = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -25,7 +25,7 @@ const Header = () => {
     <header className="header relative flex items-center justify-between gap-2 px-4 py-6 desktop:px-14 desktop:py-7">
       {!showSearchBar && (
         <>
-          <Link to="/" className="logo mr-auto">
+          <Link to="/TvFlix/" className="logo mr-auto">
             <img
               src={logo}
               alt="TvFlix home"

@@ -1,6 +1,19 @@
-import { MovieGridList } from "../sections/";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { fetchSearchPage } from "../redux/movieSlice";
+import { MovieGridList } from "../components";
 
 const MovieSearchList = () => {
+  const { keyword } = useParams();
+  const dispatch = useDispatch();
+  const searchResult = useSelector((state) => state.movies.searchPage);
+
+  useEffect(() => {
+    dispatch(fetchSearchPage(keyword));
+  }, [keyword]);
+
   return (
     <section className="containerr">
       <div className="movie-list pt-8">
@@ -8,9 +21,9 @@ const MovieSearchList = () => {
           Results for
         </p>
         <h1 className="heading tablet:text-[54px] mb-[32px] text-[40px] tracking-[2px]">
-          "hello"
+          {`"${keyword}"`}
         </h1>
-        <MovieGridList />
+        <MovieGridList movieList={searchResult} />
       </div>
     </section>
   );
