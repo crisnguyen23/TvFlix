@@ -9,7 +9,11 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
           <h3 className="mb-3 mr-2 inline-block text-[26px] font-bold tracking-[0.5px]">
             {title}
           </h3>
-          <i className="fa-solid fa-caret-right text-[24px]"></i>
+          {path ? (
+            <i className="fa-solid fa-caret-right text-[24px]"></i>
+          ) : (
+            <></>
+          )}
         </div>
       </Link>
       <div className="slider-list slider-large">

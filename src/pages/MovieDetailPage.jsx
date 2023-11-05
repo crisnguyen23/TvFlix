@@ -149,10 +149,12 @@ const MovieDetailPage = () => {
               </div>
             </div>
           </div>
-          <MovieListingSlider
-            title={`You May Also Like`}
-            movieSlider={movieSimilar}
-          />
+          <div>
+            <h3 className="mr-2 inline-block translate-y-[40px] text-[26px] font-bold tracking-[0.5px]">
+              You May Also Like
+            </h3>
+            <MovieListingSlider movieSlider={movieSimilar} />
+          </div>
         </>
       )}
     </div>
