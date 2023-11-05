@@ -92,15 +92,6 @@
     animation: searchFadeIn 0.5s ease-in-out;
   }
 
-  @keyframes spinner {
-    from {
-      transform: translateY(-50%) rotate(0);
-    }
-    to {
-      transform: translateY(-50%) rotate(1turn);
-    }
-  }
-
   @keyframes searchFadeIn {
     from {
       opacity: 0.6;
@@ -258,7 +249,7 @@
 }
 
 @layer utilities {
-  .loading {
+  .loading-search {
     animation: spinner 1s linear infinite;
   }
 
@@ -266,6 +257,15 @@
     animation: spinner 1.5s linear infinite;
     /* transform: translateX(-50%);
     transform: translateY(-50%); */
+  }
+
+  @keyframes spinner {
+    from {
+      transform: translateY(-50%) rotate(0);
+    }
+    to {
+      transform: translateY(-50%) rotate(1turn);
+    }
   }
 
   .boxshadow-searchfield:focus {

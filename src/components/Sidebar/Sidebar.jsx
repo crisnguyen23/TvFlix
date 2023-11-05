@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 
 import Genre from "./Genre";
+
 import logoTMDB from "../../assets/logos/tmdb-logo.svg";
 import copyrighticon from "../../assets/icons/copyright-sign.svg";
 
@@ -13,7 +14,14 @@ const Sidebar = () => {
         <div className="sidebar-list">
           <h4 className="mb-2 text-[22px] font-bold tracking-[0.5px]">Genre</h4>
           {genreList.length === 0 ? (
-            <div>Loading...</div>
+            <div className="mt-[-30px]">
+              <div className="inline-block translate-y-[42px]">
+                <i className="fa-solid fa-circle-notch loading-page w-[22px] text-[22px] text-primary"></i>
+              </div>
+              <div className="ml-[28px] inline-block text-[20px] text-textColor">
+                Loading....
+              </div>
+            </div>
           ) : (
             <>
               {genreList.map((genre) => (

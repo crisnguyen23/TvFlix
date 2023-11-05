@@ -2,16 +2,15 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import VideoCard from "./VideoCard";
 import {
   fetchMovieDetail,
   fetchMovieSimilar,
   removeMovieDetail,
-} from "../../redux/movieSlice";
-import { MovieListingSlider } from "../../components";
-import { imageBaseURL } from "../../utils/api";
+} from "../redux/movieSlice";
+import { MovieListingSlider } from "../components";
+import { imageBaseURL } from "../utils/api";
 
-const MovieDetail = () => {
+const MovieDetailPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.movies.movieDetail);
@@ -62,8 +61,13 @@ const MovieDetail = () => {
   return (
     <div className="containerr">
       {data.length === 0 ? (
-        <div className="heading ml-[16px] mt-[30px] text-[46px]">
-          Loading....
+        <div className="ml-4 mt-10">
+          <div className="inline-block translate-y-[26px]">
+            <i className="fa-solid fa-circle-notch loading-page w-[46px] text-[46px] text-primary"></i>
+          </div>
+          <div className="heading ml-[16px] inline-block text-[44px]">
+            Loading....
+          </div>
         </div>
       ) : (
         <>
@@ -128,7 +132,18 @@ const MovieDetail = () => {
                   {filterVideos(videos.results)
                     .slice(0, 5)
                     .map((video) => (
-                      <VideoCard key={video.id} data={video} />
+                      <div className="video-card" key={video.id}>
+                        <iframe
+                          width="500"
+                          height="294"
+                          src={`https://www.youtube.com/embed/${video.key}?&theme=dark&color=white&rel=0`}
+                          frameBorder="0"
+                          allowFullScreen="1"
+                          title={video.name}
+                          className="img-cover"
+                          loading="lazy"
+                        ></iframe>
+                      </div>
                     ))}
                 </div>
               </div>
@@ -144,4 +159,4 @@ const MovieDetail = () => {
   );
 };
 
-export default MovieDetail;
+export default MovieDetailPage;

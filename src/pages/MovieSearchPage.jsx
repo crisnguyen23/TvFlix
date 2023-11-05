@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { fetchSearchPage } from "../redux/movieSlice";
 import { MovieGridList } from "../components";
 
-const MovieSearchList = () => {
+const MovieSearchPage = () => {
   const { keyword } = useParams();
   const dispatch = useDispatch();
   const searchResult = useSelector((state) => state.movies.searchPage);
@@ -29,4 +29,4 @@ const MovieSearchList = () => {
   );
 };
 
-export default MovieSearchList;
+export default MovieSearchPage;

@@ -13,19 +13,21 @@ import {
 import { Header, Sidebar } from "./components";
 import {
   Home,
-  MovieGenreList,
-  MovieSearchList,
-  MovieDetail,
+  MovieGenrePage,
+  MovieSearchPage,
+  MovieDetailPage,
   PageNotFound,
 } from "./pages";
 
 function App() {
   const loadingPage = useSelector((state) => state.movies.loadingPage);
-  const [wait, setWait] = useState(false);
-  setTimeout(() => {
-    setWait(true);
-  }, 1500);
+  const [watchLoading, setWatchLoading] = useState(false);
   const dispatch = useDispatch();
+
+  setTimeout(() => {
+    setWatchLoading(true);
+  }, 1500);
+
   useEffect(() => {
     dispatch(fetchGenreList());
     dispatch(fetchMoviePopular());
@@ -36,7 +38,7 @@ function App() {
 
   return (
     <>
-      {loadingPage && wait ? (
+      {loadingPage && watchLoading ? (
         <BrowserRouter>
           <Header />
           <main className="desktop:grid-cols-main desktop:grid">
@@ -44,14 +46,14 @@ function App() {
             <Routes>
               <Route path="/TvFlix/" element={<Home />} />
               <Route
-                path="/TvFlix/movie/:id/:name"
-                element={<MovieGenreList />}
+                path="/TvFlix/movie/:id/:genre"
+                element={<MovieGenrePage />}
               />
               <Route
                 path="/TvFlix/movie/search/:keyword"
-                element={<MovieSearchList />}
+                element={<MovieSearchPage />}
               />
-              <Route path="/TvFlix/movie/:id" element={<MovieDetail />} />
+              <Route path="/TvFlix/movie/:id" element={<MovieDetailPage />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </main>

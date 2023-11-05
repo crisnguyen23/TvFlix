@@ -1,5 +1,5 @@
 export { default as Home } from "./Home/Home";
-export { default as MovieDetail } from "./MovieDetail/MovieDetail";
-export { default as MovieGenreList } from "./MovieGenreList";
-export { default as MovieSearchList } from "./MovieSearchList";
+export { default as MovieDetailPage } from "./MovieDetailPage";
+export { default as MovieGenrePage } from "./MovieGenrePage";
+export { default as MovieSearchPage } from "./MovieSearchPage";
 export { default as PageNotFound } from "./PageNotFound";

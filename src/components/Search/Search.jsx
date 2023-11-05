@@ -13,7 +13,7 @@ const Search = ({ size, focus }) => {
 
   const inputRef = useRef();
   const dispatch = useDispatch();
-  const debouncedValue = useDebounce(searchValue, 500);
+  const debouncedValue = useDebounce(searchValue, 600);
   const statusLoading = useSelector((state) => state.movies.status);
   const searchResult = useSelector((state) => state.movies.searchResults);
 
@@ -94,8 +94,7 @@ const Search = ({ size, focus }) => {
         )}
 
         {loading && (
-          <i className="fa-solid fa-spinner loading-icon loading text-white opacity-100"></i>
-          // <i class="fa-solid fa-circle-notch loading-icon loading text-primary opacity-100"></i>
+          <i className="fa-solid fa-spinner loading-icon loading-search text-white opacity-100"></i>
         )}
       </div>
     </Tippy>

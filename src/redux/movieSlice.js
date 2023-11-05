@@ -145,6 +145,7 @@ const movieSlice = createSlice({
   initialState: {
     loadingPage: "",
     status: "",
+    genreChoosing: "",
     searchResults: [],
     searchPage: [],
     genreList: [],
@@ -157,6 +158,9 @@ const movieSlice = createSlice({
     movieSimilar: [],
   },
   reducers: {
+    chooseGenre: (state, action) => {
+      state.genreChoosing = action.payload;
+    },
     removeSearchResults: (state) => {
       state.searchResults = [];
     },
@@ -213,6 +217,10 @@ const movieSlice = createSlice({
   },
 });
 
-export const { removeSearchResults, removeMovieDetail, removeMovieList } =
-  movieSlice.actions;
+export const {
+  removeSearchResults,
+  removeMovieDetail,
+  removeMovieList,
+  chooseGenre,
+} = movieSlice.actions;
 export default movieSlice.reducer;
