@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { imageBaseURL } from "../../utils/api";
+import { chooseGenre, setShowSideBar } from "../../redux/movieSlice";
 
 const MovieItemSearch = ({ data }) => {
+  const dispatch = useDispatch();
   return (
     <Link to={`/TvFlix/movie/${data.id}`}>
-      <div className="transition-short group mb-3 flex items-center opacity-70 hover:opacity-100">
+      <div
+        className="transition-short group mb-3 flex items-center opacity-70 hover:opacity-100"
+        onClick={() => {
+          dispatch(chooseGenre(""));
+          dispatch(setShowSideBar(false));
+        }}
+      >
         <div className="poster-box aspect-[2/3] w-10 flex-shrink-0 rounded-[4px]">
           {data.poster_path && (
             <img

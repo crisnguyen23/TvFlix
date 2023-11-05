@@ -3,37 +3,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Tippy from "@tippyjs/react/headless";
 
-import { fetchSearchMovies, removeSearchResults } from "../../redux/movieSlice";
+import {
+  chooseGenre,
+  setShowSideBar,
+  fetchSearchMovies,
+  removeSearchResults,
+} from "../../redux/movieSlice";
 import MovieItemSearch from "./MovieItemSearch";
 import useDebounce from "../../hooks/useDebounce";
 
 const Search = ({ size, focus }) => {
-  const [searchValue, setSearchValue] = useState("");
-  const [showResult, setShowResult] = useState(false);
-
   const inputRef = useRef();
   const dispatch = useDispatch();
+  const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce(searchValue, 600);
+  const [showResult, setShowResult] = useState(false);
   const statusLoading = useSelector((state) => state.movies.status);
   const searchResult = useSelector((state) => state.movies.searchResults);
+  let loading = false;
+  statusLoading === "loading" ? (loading = true) : (loading = false);
+
+  useEffect(() => {
+    // first time render => prevent fetchSearchMovies
+    if (!debouncedValue.trim()) {
+      dispatch(removeSearchResults());
+      return;
+    }
+    dispatch(fetchSearchMovies(debouncedValue));
+  }, [debouncedValue]);
 
   const handleClear = () => {
     setSearchValue("");
     dispatch(removeSearchResults());
     inputRef.current.focus();
   };
-
-  let loading = false;
-  statusLoading === "loading" ? (loading = true) : (loading = false);
-
-  useEffect(() => {
-    if (!debouncedValue.trim()) {
-      dispatch(removeSearchResults());
-      return;
-    }
-
-    dispatch(fetchSearchMovies(debouncedValue));
-  }, [debouncedValue]);
 
   return (
     <Tippy
@@ -52,7 +55,13 @@ const Search = ({ size, focus }) => {
             <MovieItemSearch key={result.id} data={result} />
           ))}
           <Link to={`/TvFlix/movie/search/${searchValue}`}>
-            <div className="block truncate p-3 pt-1 text-lg text-primary opacity-70 hover:opacity-100">
+            <div
+              className="block truncate p-3 pt-1 text-lg text-primary opacity-70 hover:opacity-100"
+              onClick={() => {
+                dispatch(chooseGenre(""));
+                dispatch(setShowSideBar(false));
+              }}
+            >
               {`View all results for "${searchValue}"`}
             </div>
           </Link>
@@ -71,12 +80,12 @@ const Search = ({ size, focus }) => {
           ref={inputRef}
           value={searchValue}
           onChange={(e) => {
-            if (!searchValue.startsWith(" ")) {
+            if (!e.target.value.startsWith(" ")) {
               setSearchValue(e.target.value);
             }
           }}
-          autoFocus={focus}
           onFocus={() => setShowResult(true)}
+          autoFocus={focus}
           type="text"
           name="search"
           placeholder="Search any movies..."

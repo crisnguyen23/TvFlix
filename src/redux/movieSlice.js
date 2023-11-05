@@ -29,6 +29,20 @@ export const fetchMovieListGenre = createAsyncThunk(
   },
 );
 
+export const fetchMoreMovieLoad = createAsyncThunk(
+  "movies/fetchMoreMovieLoad",
+  async ({ key, id, nextPage }) => {
+    const res = await tmdbAPI.get(`/discover/movie`, {
+      params: {
+        api_key: APIKey,
+        [key]: id,
+        page: nextPage,
+      },
+    });
+    return res.data.results;
+  },
+);
+
 export const fetchMoviePopular = createAsyncThunk(
   "movies/fetchMoviePopular",
   async () => {
@@ -144,8 +158,10 @@ const movieSlice = createSlice({
   name: "movies",
   initialState: {
     loadingPage: "",
+    loadingBtnLoadMore: false,
     status: "",
     genreChoosing: "",
+    showSideBar: false,
     searchResults: [],
     searchPage: [],
     genreList: [],
@@ -160,6 +176,9 @@ const movieSlice = createSlice({
   reducers: {
     chooseGenre: (state, action) => {
       state.genreChoosing = action.payload;
+    },
+    setShowSideBar: (state, action) => {
+      state.showSideBar = action.payload;
     },
     removeSearchResults: (state) => {
       state.searchResults = [];
@@ -186,11 +205,15 @@ const movieSlice = createSlice({
       .addCase(fetchGenreList.fulfilled, (state, action) => {
         state.genreList = action.payload;
       })
-      // .addCase(fetchGenreList.fulfilled, (state, action) => {
-      //   state.loadingPage = false;
-      // })
       .addCase(fetchMovieListGenre.fulfilled, (state, action) => {
         state.movieList = action.payload;
+      })
+      .addCase(fetchMoreMovieLoad.pending, (state) => {
+        state.loadingBtnLoadMore = true;
+      })
+      .addCase(fetchMoreMovieLoad.fulfilled, (state, action) => {
+        state.movieList = [...state.movieList, ...action.payload];
+        state.loadingBtnLoadMore = false;
       })
       .addCase(fetchMoviePopular.pending, (state) => {
         state.loadingPage = false;
@@ -218,9 +241,10 @@ const movieSlice = createSlice({
 });
 
 export const {
+  chooseGenre,
+  setShowSideBar,
   removeSearchResults,
   removeMovieDetail,
   removeMovieList,
-  chooseGenre,
 } = movieSlice.actions;
 export default movieSlice.reducer;

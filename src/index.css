@@ -108,7 +108,7 @@
   }
 
   .sidebar-list {
-    @apply grid gap-2 px-9 desktop:px-14;
+    @apply grid gap-[10px] px-9 desktop:px-14;
   }
 
   .genere-list {
@@ -255,8 +255,6 @@
 
   .loading-page {
     animation: spinner 1.5s linear infinite;
-    /* transform: translateX(-50%);
-    transform: translateY(-50%); */
   }
 
   @keyframes spinner {
@@ -278,6 +276,19 @@
 
   .transition-long {
     transition: 500ms ease;
+  }
+
+  .transition-sidebar {
+    animation: overlayFadeIn 500ms ease;
+  }
+
+  @keyframes overlayFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.5;
+    }
   }
 
   .overflow-y-overlay {

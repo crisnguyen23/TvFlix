@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { chooseGenre } from "../../redux/movieSlice";
+import { chooseGenre, setShowSideBar } from "../../redux/movieSlice";
 
 const Genre = ({ name, id }) => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const Genre = ({ name, id }) => {
           className="genere-list"
           onClick={() => {
             dispatch(chooseGenre(name));
+            dispatch(setShowSideBar(false));
           }}
           style={{
             color: genreChoosing === name ? "white" : "",

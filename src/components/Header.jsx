@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowSideBar, chooseGenre } from "../redux/movieSlice";
 
 import logo from "../assets/logos/logo.svg";
 import Search from "./Search/Search";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [showSideBar, setShowSideBar] = useState(false);
+  const showSideBar = useSelector((state) => state.movies.showSideBar);
 
   const setWindowDimensions = () => {
     if (window.innerWidth > 768) {
@@ -30,6 +33,10 @@ const Header = () => {
               src={logo}
               alt="TvFlix home"
               className="w-[140px] desktop:w-40"
+              onClick={() => {
+                dispatch(chooseGenre(""));
+                dispatch(setShowSideBar(false));
+              }}
             />
           </Link>
           <div
@@ -43,7 +50,9 @@ const Header = () => {
 
           <div
             className="h-12 w-12 cursor-pointer text-center leading-[48px] hover:opacity-60 max-desktop:order-3 desktop:hidden"
-            onClick={() => setShowSideBar(!showSideBar)}
+            onClick={() => {
+              dispatch(setShowSideBar(!showSideBar));
+            }}
           >
             <i className="fa-solid fa-bars text-[24px]"></i>
           </div>
