@@ -6,7 +6,7 @@ import { chooseGenre, setShowSideBar } from "../../redux/movieSlice";
 const MovieItemSearch = ({ data }) => {
   const dispatch = useDispatch();
   return (
-    <Link to={`/TvFlix/movie/${data.id}`}>
+    <Link to={`/TvFlix/movie/detail/${data.id}`}>
       <div
         className="transition-short group mb-3 flex items-center opacity-70 hover:opacity-100"
         onClick={() => {

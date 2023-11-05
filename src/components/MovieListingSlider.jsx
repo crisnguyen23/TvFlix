@@ -1,12 +1,17 @@
 import MovieCard from "./MovieCard";
+import { Link } from "react-router-dom";
 
-const MovieListingSlider = ({ title, movieSlider }) => {
+const MovieListingSlider = ({ title, movieSlider, path }) => {
   return (
     <div className="movie-list pt-8">
-      <div>
-        <h3 className="mb-6 text-[26px] font-bold tracking-[0.5px]">{title}</h3>
-        {/* <h3> See all movies</h3> */}
-      </div>
+      <Link to={`/TvFlix/movie/all/${path}`}>
+        <div className="hover:opacity-60">
+          <h3 className="mb-3 mr-2 inline-block text-[26px] font-bold tracking-[0.5px]">
+            {title}
+          </h3>
+          <i className="fa-solid fa-caret-right text-[24px]"></i>
+        </div>
+      </Link>
       <div className="slider-list slider-large">
         {movieSlider.length === 0 ? (
           <></>

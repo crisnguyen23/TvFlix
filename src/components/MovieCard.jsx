@@ -4,7 +4,7 @@ import { imageBaseURL } from "../utils/api";
 const MovieCard = ({ size, data }) => {
   return (
     <section>
-      <Link to={`/TvFlix/movie/${data.id}`}>
+      <Link to={`/TvFlix/movie/detail/${data.id}`}>
         <div style={{ width: size }}>
           <figure className="poster-box">
             <img

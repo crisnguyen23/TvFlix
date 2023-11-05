@@ -2,61 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { APIKey } from "../utils/api";
 import tmdbAPI from "../utils/httpRequest";
 
-export const fetchGenreList = createAsyncThunk(
-  "movies/fetchGenreList",
-  async () => {
-    const res = await tmdbAPI.get(`/genre/movie/list`, {
-      params: {
-        api_key: APIKey,
-        language: "en-US",
-      },
-    });
-    return res.data.genres;
-  },
-);
-
-export const fetchMovieListGenre = createAsyncThunk(
-  "movies/fetchMovieListGenre",
-  async ({ key, id }) => {
-    const res = await tmdbAPI.get(`/discover/movie`, {
-      params: {
-        api_key: APIKey,
-        [key]: id,
-        page: 1,
-      },
-    });
-    return res.data.results;
-  },
-);
-
-export const fetchMoreMovieLoad = createAsyncThunk(
-  "movies/fetchMoreMovieLoad",
-  async ({ key, id, nextPage }) => {
-    const res = await tmdbAPI.get(`/discover/movie`, {
-      params: {
-        api_key: APIKey,
-        [key]: id,
-        page: nextPage,
-      },
-    });
-    return res.data.results;
-  },
-);
-
-export const fetchMoviePopular = createAsyncThunk(
-  "movies/fetchMoviePopular",
-  async () => {
-    const res = await tmdbAPI.get(`/movie/popular`, {
-      params: {
-        api_key: APIKey,
-        language: "en-US",
-        page: 1,
-      },
-    });
-    return res.data.results;
-  },
-);
-
+// ----------Call API Home Page--------------
 export const fetchMovieTrendingWeek = createAsyncThunk(
   "movies/fetchMovieTrendingWeek",
   async () => {
@@ -99,6 +45,21 @@ export const fetchMovieTopRated = createAsyncThunk(
   },
 );
 
+export const fetchMoviePopular = createAsyncThunk(
+  "movies/fetchMoviePopular",
+  async () => {
+    const res = await tmdbAPI.get(`/movie/popular`, {
+      params: {
+        api_key: APIKey,
+        language: "en-US",
+        page: 1,
+      },
+    });
+    return res.data.results;
+  },
+);
+
+// --------------Call search movie API-----------
 export const fetchSearchMovies = createAsyncThunk(
   "movies/fechSearchMovies",
   async (searchValue) => {
@@ -127,6 +88,63 @@ export const fetchSearchPage = createAsyncThunk(
   },
 );
 
+// --------------Call MovieGenrePage--------------
+export const fetchGenreList = createAsyncThunk(
+  "movies/fetchGenreList",
+  async () => {
+    const res = await tmdbAPI.get(`/genre/movie/list`, {
+      params: {
+        api_key: APIKey,
+        language: "en-US",
+      },
+    });
+    return res.data.genres;
+  },
+);
+
+export const fetchMovieListGenre = createAsyncThunk(
+  "movies/fetchMovieListGenre",
+  async ({ key, id }) => {
+    const res = await tmdbAPI.get(`/discover/movie`, {
+      params: {
+        api_key: APIKey,
+        [key]: id,
+        page: 1,
+      },
+    });
+    return res.data.results;
+  },
+);
+
+export const fetchMoreMovieGenre = createAsyncThunk(
+  "movies/fetchMoreMovieGenre",
+  async ({ key, id, currentPage }) => {
+    const res = await tmdbAPI.get(`/discover/movie`, {
+      params: {
+        api_key: APIKey,
+        [key]: id,
+        page: currentPage,
+      },
+    });
+    return res.data.results;
+  },
+);
+
+export const fetchLoadMoreMovie = createAsyncThunk(
+  "movies/fetchLoadMoreMovie",
+  async ({ path, currentPage }) => {
+    const res = await tmdbAPI.get(`/movie/${path}`, {
+      params: {
+        api_key: APIKey,
+        language: "en-US",
+        page: currentPage,
+      },
+    });
+    return res.data.results;
+  },
+);
+
+// ---------Call Movie Detail Page-------------
 export const fetchMovieDetail = createAsyncThunk(
   "movies/fetchMovieDetail",
   async (id) => {
@@ -166,10 +184,10 @@ const movieSlice = createSlice({
     searchPage: [],
     genreList: [],
     movieList: [],
-    moviePopular: [],
     movieTrending: [],
     movieUpcoming: [],
     movieTopRated: [],
+    moviePopular: [],
     movieDetail: [],
     movieSimilar: [],
   },
@@ -192,6 +210,22 @@ const movieSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchMovieTrendingWeek.pending, (state) => {
+        state.loadingPage = false;
+      })
+      .addCase(fetchMovieTrendingWeek.fulfilled, (state, action) => {
+        state.movieTrending = action.payload;
+        state.loadingPage = true;
+      })
+      .addCase(fetchMovieUpcoming.fulfilled, (state, action) => {
+        state.movieUpcoming = action.payload;
+      })
+      .addCase(fetchMovieTopRated.fulfilled, (state, action) => {
+        state.movieTopRated = action.payload;
+      })
+      .addCase(fetchMoviePopular.fulfilled, (state, action) => {
+        state.moviePopular = action.payload;
+      })
       .addCase(fetchSearchMovies.pending, (state) => {
         state.status = "loading";
       })
@@ -208,28 +242,21 @@ const movieSlice = createSlice({
       .addCase(fetchMovieListGenre.fulfilled, (state, action) => {
         state.movieList = action.payload;
       })
-      .addCase(fetchMoreMovieLoad.pending, (state) => {
+      .addCase(fetchMoreMovieGenre.pending, (state) => {
         state.loadingBtnLoadMore = true;
       })
-      .addCase(fetchMoreMovieLoad.fulfilled, (state, action) => {
+      .addCase(fetchMoreMovieGenre.fulfilled, (state, action) => {
         state.movieList = [...state.movieList, ...action.payload];
         state.loadingBtnLoadMore = false;
       })
-      .addCase(fetchMoviePopular.pending, (state) => {
-        state.loadingPage = false;
+      .addCase(fetchLoadMoreMovie.pending, (state) => {
+        state.loadingBtnLoadMore = true;
       })
-      .addCase(fetchMoviePopular.fulfilled, (state, action) => {
-        state.moviePopular = action.payload;
-        state.loadingPage = true;
-      })
-      .addCase(fetchMovieTrendingWeek.fulfilled, (state, action) => {
-        state.movieTrending = action.payload;
-      })
-      .addCase(fetchMovieUpcoming.fulfilled, (state, action) => {
-        state.movieUpcoming = action.payload;
-      })
-      .addCase(fetchMovieTopRated.fulfilled, (state, action) => {
-        state.movieTopRated = action.payload;
+      .addCase(fetchLoadMoreMovie.fulfilled, (state, action) => {
+        state.loadingBtnLoadMore = false;
+        state.movieUpcoming = [...state.movieUpcoming, ...action.payload];
+        state.movieTopRated = [...state.movieTopRated, ...action.payload];
+        state.moviePopular = [...state.moviePopular, ...action.payload];
       })
       .addCase(fetchMovieDetail.fulfilled, (state, action) => {
         state.movieDetail = action.payload;

@@ -9,7 +9,7 @@ const Genre = ({ name, id }) => {
 
   return (
     <section>
-      <Link to={`/TvFlix/movie/${id}/${name}`}>
+      <Link to={`/TvFlix/movie/${name}/${id}`}>
         <span
           className="genere-list"
           onClick={() => {

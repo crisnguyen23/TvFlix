@@ -12,7 +12,7 @@ const Sidebar = () => {
 
   return (
     <nav
-      className="sidebar desktop:h-desktop h-tablet top-s[96px] overflow-y-overlay transition-long absolute bottom-0 z-[5] max-w-[340px] bg-background desktop:static desktop:border-t-0"
+      className="sidebar desktop:h-desktop h-tablet top-s[96px] overflow-y-overlay transition-long absolute bottom-0 z-[10] max-w-[340px] bg-background desktop:static desktop:border-t-0"
       style={{ left: showSideBar ? "0" : "-250px" }}
     >
       <div className="sidebar-inner grid gap-5 pb-3 pt-9 ">
@@ -73,7 +73,7 @@ const Sidebar = () => {
       </div>
 
       <section
-        className="overlay transition-sidebar fixed bottom-0 left-[250px] top-[96px] z-[3] w-full bg-background opacity-50"
+        className="overlay transition-sidebar fixed bottom-0  left-[250px] top-[96px] z-[3] w-full bg-background opacity-50"
         hidden={!showSideBar}
         onClick={() => {
           dispatch(setShowSideBar(false));

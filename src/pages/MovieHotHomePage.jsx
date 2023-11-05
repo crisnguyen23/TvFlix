@@ -1,45 +1,41 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MovieGridList } from "../components";
-import {
-  fetchMovieListGenre,
-  fetchMoreMovieGenre,
-  removeMovieList,
-} from "../redux/movieSlice";
+import { fetchLoadMoreMovie } from "../redux/movieSlice";
 
-const MovieGenrePage = () => {
+const MovieHotHomePage = () => {
   let key = "";
   const dispatch = useDispatch();
-  const { genre, id } = useParams();
+  const { path, title } = useParams();
   const [currentPage, setCurrentPage] = useState(2);
-  const movieList = useSelector((state) => state.movies.movieList);
   const loadingBtnLoadMore = useSelector(
     (state) => state.movies.loadingBtnLoadMore,
   );
 
-  if (isNaN(id)) {
-    key = "with_original_language";
-  } else {
-    key = "with_genres";
+  let data = [];
+  switch (path) {
+    case "upcoming":
+      data = useSelector((state) => state.movies.movieUpcoming);
+      break;
+    case "popular":
+      data = useSelector((state) => state.movies.moviePopular);
+      break;
+    case "top_rated":
+      data = useSelector((state) => state.movies.movieTopRated);
+      break;
+    default:
+      throw new Error("Error path!");
   }
-
-  useEffect(() => {
-    dispatch(fetchMovieListGenre({ key, id }));
-
-    return () => {
-      dispatch(removeMovieList());
-    };
-  }, [id]);
 
   const handleLoadMoreMovie = () => {
     setCurrentPage((currentPage) => currentPage + 1);
-    dispatch(fetchMoreMovieGenre({ key, id, currentPage }));
+    dispatch(fetchLoadMoreMovie({ path, currentPage }));
   };
 
   return (
     <section className="containerr">
-      {movieList.length === 0 ? (
+      {data.length === 0 ? (
         <div className="ml-4 mt-10">
           <div className="inline-block translate-y-[26px]">
             <i className="fa-solid fa-circle-notch loading-search w-[46px] text-[46px] text-primary"></i>
@@ -53,10 +49,10 @@ const MovieGenrePage = () => {
           <div className="genre-list pt-8">
             <div className="title mb-[56px]">
               <h1 className="heading tablet:text-[54px] text-[46px] tracking-[3px]">
-                {`All ${genre} Movies`}
+                {`All ${title} Movies`}
               </h1>
             </div>
-            <MovieGridList movieList={movieList} />
+            <MovieGridList movieList={data} />
           </div>
           <button
             className="btn mx-auto mb-[60px] mt-9 bg-primaryVariant"
@@ -80,4 +76,4 @@ const MovieGenrePage = () => {
   );
 };
 
-export default MovieGenrePage;
+export default MovieHotHomePage;

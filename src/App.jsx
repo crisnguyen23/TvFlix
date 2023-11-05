@@ -13,6 +13,7 @@ import {
 import { Header, Sidebar } from "./components";
 import {
   Home,
+  MovieHotHomePage,
   MovieGenrePage,
   MovieSearchPage,
   MovieDetailPage,
@@ -30,10 +31,10 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchGenreList());
-    dispatch(fetchMoviePopular());
     dispatch(fetchMovieTrendingWeek());
     dispatch(fetchMovieUpcoming());
     dispatch(fetchMovieTopRated());
+    dispatch(fetchMoviePopular());
   }, []);
 
   return (
@@ -46,14 +47,21 @@ function App() {
             <Routes>
               <Route path="/TvFlix/" element={<Home />} />
               <Route
-                path="/TvFlix/movie/:id/:genre"
+                path="/TvFlix/movie/all/:path/:title"
+                element={<MovieHotHomePage />}
+              />
+              <Route
+                path="/TvFlix/movie/:genre/:id"
                 element={<MovieGenrePage />}
               />
               <Route
                 path="/TvFlix/movie/search/:keyword"
                 element={<MovieSearchPage />}
               />
-              <Route path="/TvFlix/movie/:id" element={<MovieDetailPage />} />
+              <Route
+                path="/TvFlix/movie/detail/:id"
+                element={<MovieDetailPage />}
+              />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </main>

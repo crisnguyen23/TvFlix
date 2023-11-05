@@ -64,7 +64,7 @@ const Banner = ({ data }) => {
               </div>
               <p className="genre my-3">{genreChar.join(", ")}</p>
               <p className="banner-text mb-6">{overview}</p>
-              <Link to={`/TvFlix/movie/${id}`}>
+              <Link to={`/TvFlix/movie/detail/${id}`}>
                 <button className="btn">
                   <i className="fa-regular fa-circle-play text-[24px]"></i>
                   <span>Watch Now</span>
