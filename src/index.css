@@ -308,4 +308,11 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   }
+
+  .title-banner {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+  }
 }

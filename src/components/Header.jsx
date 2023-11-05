@@ -25,7 +25,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="header relative flex items-center justify-between gap-2 px-4 py-6 desktop:px-14 desktop:py-7">
+    <header className="header relative flex items-center justify-between gap-2 px-4 py-6 desktop:px-8 desktop:py-7">
       {!showSearchBar && (
         <>
           <Link to="/TvFlix/" className="logo mr-auto">
@@ -53,6 +53,7 @@ const Header = () => {
             onClick={() => {
               dispatch(setShowSideBar(!showSideBar));
             }}
+            style={{ opacity: showSideBar ? "1" : "" }}
           >
             <i className="fa-solid fa-bars text-[24px]"></i>
           </div>
@@ -64,7 +65,7 @@ const Header = () => {
       </div>
 
       {showSearchBar && (
-        <div className="tablet:hidden flex flex-1">
+        <div className="flex flex-1 tablet:hidden">
           <div className="inline-block flex-1">
             <Search size={"100%"} focus={showSearchBar} />
           </div>

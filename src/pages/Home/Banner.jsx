@@ -47,7 +47,7 @@ const Banner = ({ data }) => {
           <div className="banner-slider">
             <div className="slider-item absolute left-0 top-0 h-full w-full">
               <img
-                src={`${imageBaseURL}/w1280/${backdrop_path || poster_path}`}
+                src={`${imageBaseURL}/original/${backdrop_path || poster_path}`}
                 alt={title}
                 className="img-cover"
                 loading="lazy"
@@ -55,7 +55,7 @@ const Banner = ({ data }) => {
             </div>
 
             <div className="banner-content tablet:bottom-1/2 tablet:left-[50px] tablet:translate-y-1/2 absolute bottom-[206px] left-6 right-auto z-[1] max-w-[480px] text-[#ffffffb0] desktop:left-[100px] ">
-              <h2 className="heading tablet:text-[54px] tablet:tracking-[3px] mb-4 text-[40px] tracking-[2px]">
+              <h2 className="heading tablet:text-[54px] tablet:tracking-[3px] title-banner mb-4 text-[40px] tracking-[2px]">
                 {title}
               </h2>
               <div className="meta-list">

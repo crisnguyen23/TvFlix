@@ -75,14 +75,14 @@ const MovieDetailPage = () => {
             <div
               className="backdrop-image"
               style={{
-                backgroundImage: `url(${imageBaseURL}/w1280/${
+                backgroundImage: `url(${imageBaseURL}/original/${
                   backdrop_path || poster_path
                 })`,
               }}
             ></div>
             <div className="poster-box tablet:sticky tablet:flex-shrink-0 tablet:top-0 w-full max-w-[300px]">
               <img
-                src={`${imageBaseURL}/w342/${poster_path}`}
+                src={`${imageBaseURL}/original/${poster_path}`}
                 alt={`${title}`}
                 className="img-cover"
               />
