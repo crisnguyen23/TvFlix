@@ -18,10 +18,9 @@ const Search = ({ size, focus }) => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce(searchValue, 600);
   const [showResult, setShowResult] = useState(false);
-  const statusLoading = useSelector((state) => state.movies.status);
   const searchResult = useSelector((state) => state.movies.searchResults);
-  let loading = false;
-  statusLoading === "loading" ? (loading = true) : (loading = false);
+  const statusLoading = useSelector((state) => state.movies.statusLoading);
+  const showTippy = useSelector((state) => state.movies.showTippy);
 
   useEffect(() => {
     // first time render => prevent fetchSearchMovies
@@ -42,10 +41,10 @@ const Search = ({ size, focus }) => {
     <Tippy
       interactive
       onClickOutside={() => setShowResult(false)}
-      visible={showResult && searchResult.length > 0}
+      visible={showResult && showTippy && searchValue.length > 0}
       render={(attrs) => (
         <div
-          className="overflow-y-overlay max-h-[350px] min-h-[100px] rounded-lg bg-banner px-2 pt-2 text-white"
+          className="overflow-y-overlay max-h-[350px] min-h-[54px] overflow-x-hidden rounded-lg bg-banner px-2 pt-2 text-white"
           style={{ width: size === "100%" ? "calc(100dvw - 80px)" : size }}
           tabIndex="-1"
           {...attrs}
@@ -54,23 +53,24 @@ const Search = ({ size, focus }) => {
           {searchResult.slice(0, 5).map((result) => (
             <MovieItemSearch key={result.id} data={result} />
           ))}
-          <Link to={`/TvFlix/movie/search/${searchValue}`}>
-            <div
-              className="block truncate p-3 pt-1 text-lg text-primary opacity-70 hover:opacity-100"
-              onClick={() => {
-                dispatch(chooseGenre(""));
-                dispatch(setShowSideBar(false));
-              }}
-            >
-              {`View all results for "${searchValue}"`}
-            </div>
-          </Link>
 
-          {/* {searchResult.length === 0 && (
-            <div className="block p-3 pt-1 text-lg truncate text-primary opacity-70 hover:opacity-100">
-              {`Do not have any movies for "${searchValue}"`}
+          {searchResult.length === 0 ? (
+            <div className="block truncate p-3 pt-1 text-lg text-primary opacity-100">
+              {`Dont have any movies for "${searchValue}"`}
             </div>
-          )} */}
+          ) : (
+            <Link to={`/TvFlix/movie/search/${searchValue}`}>
+              <div
+                className="block truncate p-3 pt-1 text-lg text-primary opacity-70 hover:opacity-100"
+                onClick={() => {
+                  dispatch(chooseGenre(""));
+                  dispatch(setShowSideBar(false));
+                }}
+              >
+                {`View all results for "${searchValue}"`}
+              </div>
+            </Link>
+          )}
         </div>
       )}
     >
@@ -95,14 +95,14 @@ const Search = ({ size, focus }) => {
           className="transition-short boxshadow-searchfield hover:search-hover h-12 rounded-lg bg-banner pl-11 pr-4 text-lg leading-[48px] caret-white outline-none placeholder:opacity-60 focus:pl-4"
         />
 
-        {!!searchValue && !loading && (
+        {!!searchValue && !statusLoading && (
           <i
             className="fa-solid fa-circle-xmark loading-icon cursor-pointer hover:opacity-100"
             onClick={handleClear}
           ></i>
         )}
 
-        {loading && (
+        {statusLoading && (
           <i className="fa-solid fa-spinner loading-icon loading-search text-white opacity-100"></i>
         )}
       </div>

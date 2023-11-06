@@ -43,7 +43,7 @@ const Banner = ({ data }) => {
       {data.length === 0 || genreChar === 0 ? (
         <></>
       ) : (
-        <div className="banner tablet:h-[500px] relative h-[700px] overflow-x-hidden rounded-3xl">
+        <div className="banner relative h-[700px] overflow-x-hidden rounded-3xl tablet:h-[500px]">
           <div className="banner-slider">
             <div className="slider-item absolute left-0 top-0 h-full w-full">
               <img
@@ -54,8 +54,8 @@ const Banner = ({ data }) => {
               />
             </div>
 
-            <div className="banner-content tablet:bottom-1/2 tablet:left-[50px] tablet:translate-y-1/2 absolute bottom-[206px] left-6 right-auto z-[1] max-w-[480px] text-[#ffffffb0] desktop:left-[100px] ">
-              <h2 className="heading tablet:text-[54px] tablet:tracking-[3px] title-banner mb-4 text-[40px] tracking-[2px]">
+            <div className="banner-content absolute bottom-[206px] left-6 right-auto z-[1] max-w-[480px] text-[#ffffffb0] tablet:bottom-1/2 tablet:left-[50px] tablet:translate-y-1/2 desktop:left-[100px] ">
+              <h2 className="heading title-banner mb-4 text-[40px] tracking-[2px] tablet:text-[54px] tablet:tracking-[3px]">
                 {title}
               </h2>
               <div className="meta-list">

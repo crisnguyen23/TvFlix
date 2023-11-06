@@ -8,7 +8,7 @@ const MovieItemSearch = ({ data }) => {
   return (
     <Link to={`/TvFlix/movie/detail/${data.id}`}>
       <div
-        className="transition-short group mb-3 flex items-center opacity-70 hover:opacity-100"
+        className="transition-short group mb-3 flex items-center gap-[12px] opacity-70 hover:opacity-100"
         onClick={() => {
           dispatch(chooseGenre(""));
           dispatch(setShowSideBar(false));
@@ -24,7 +24,7 @@ const MovieItemSearch = ({ data }) => {
             />
           )}
         </div>
-        <div className="ml-3 flex-1">
+        <div className="flex-1">
           <div className="transition-short text-[18px] text-white">
             <h4 className="truncate text-[18px] font-bold">{data.title}</h4>
             <p className="opacity-50 group-hover:opacity-100">

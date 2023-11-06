@@ -73,7 +73,7 @@
 
 @layer components {
   .containerr {
-    @apply desktop:h-desktop h-tablet overflow-y-overlay tablet:px-6 relative z-[1] bg-surface px-5 pb-12 pt-6 text-onSurface desktop:rounded-tl-[36px];
+    @apply desktop:h-desktop h-tablet overflow-y-overlay relative z-[1] bg-surface px-5 pb-12 pt-6 text-onSurface tablet:px-6 desktop:rounded-tl-[36px];
   }
 
   .heading {
@@ -104,7 +104,7 @@
   }
 
   .btn-bg {
-    @apply tablet:hidden h-12 w-12 cursor-pointer rounded-lg bg-banner text-center text-lg  leading-[48px];
+    @apply h-12 w-12 cursor-pointer rounded-lg bg-banner text-center text-lg leading-[48px]  tablet:hidden;
   }
 
   .sidebar-list {
@@ -138,12 +138,12 @@
   }
 
   .slider-large {
-    @apply overflow-x-overlay tablet:mx-[-24px] mx-[-20px] mb-[-16px] pb-4;
+    @apply overflow-x-overlay mx-[-20px] mb-[-16px] pb-4 tablet:mx-[-24px];
   }
 
   .slider-item {
     @apply w-[100px] flex-shrink-0 cursor-pointer rounded-lg brightness-100;
-    transition: opacity 500ms ease;
+    /* animation: overlayFadeIn 500ms ease; */
     box-shadow: 0 1px 4px hsla(0, 0%, 0%, 0.75);
   }
 

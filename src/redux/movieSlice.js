@@ -177,7 +177,8 @@ const movieSlice = createSlice({
   initialState: {
     loadingPage: "",
     loadingBtnLoadMore: false,
-    status: "",
+    statusLoading: false,
+    showTippy: false,
     genreChoosing: "",
     showSideBar: false,
     searchResults: [],
@@ -200,6 +201,7 @@ const movieSlice = createSlice({
     },
     removeSearchResults: (state) => {
       state.searchResults = [];
+      state.showTippy = false;
     },
     removeMovieList: (state) => {
       state.movieList = [];
@@ -227,11 +229,13 @@ const movieSlice = createSlice({
         state.moviePopular = action.payload;
       })
       .addCase(fetchSearchMovies.pending, (state) => {
-        state.status = "loading";
+        state.statusLoading = true;
+        state.showTippy = false;
       })
       .addCase(fetchSearchMovies.fulfilled, (state, action) => {
         state.searchResults = action.payload;
-        state.status = "";
+        state.statusLoading = false;
+        state.showTippy = true;
       })
       .addCase(fetchSearchPage.fulfilled, (state, action) => {
         state.searchPage = action.payload;
