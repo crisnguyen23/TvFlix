@@ -3,7 +3,7 @@ import { imageBaseURL } from "../utils/api";
 
 const MovieCard = ({ size, data }) => {
   return (
-    <section>
+    <>
       <Link to={`/TvFlix/movie/detail/${data.id}`}>
         <div
           style={{ width: size }}
@@ -32,7 +32,7 @@ const MovieCard = ({ size, data }) => {
           </div>
         </div>
       </Link>
-    </section>
+    </>
   );
 };
 
