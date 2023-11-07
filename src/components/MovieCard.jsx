@@ -5,7 +5,10 @@ const MovieCard = ({ size, data }) => {
   return (
     <section>
       <Link to={`/TvFlix/movie/detail/${data.id}`}>
-        <div style={{ width: size }}>
+        <div
+          style={{ width: size }}
+          className="transition-long hover:scale-110"
+        >
           <figure className="poster-box">
             <img
               src={`${imageBaseURL}/original/${data.poster_path}`}
