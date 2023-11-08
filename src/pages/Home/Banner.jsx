@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import Slider from "react-slick";
 
 import { imageBaseURL } from "../../utils/api";
 
@@ -31,13 +30,6 @@ const Banner = ({ data }) => {
     }
   }
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
   return (
     <>
       {data.length === 0 || genreChar === 0 ? (
@@ -75,7 +67,6 @@ const Banner = ({ data }) => {
 
           <div className="slider-list tablet:left-slider-mobile absolute bottom-5 left-5 right-0 overflow-x-auto pb-2 ">
             <div className="control-inner flex gap-3">
-              {/* <Slider {...settings}> */}
               {data.map((playing, index) => (
                 <div
                   className="poster-box slider-item"
@@ -96,7 +87,6 @@ const Banner = ({ data }) => {
                   />
                 </div>
               ))}
-              {/* </Slider> */}
             </div>
           </div>
         </div>

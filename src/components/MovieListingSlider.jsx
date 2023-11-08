@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 const MovieListingSlider = ({ title, movieSlider, path }) => {
   const settings = {
     arrow: true,
-    infinite: true,
     swipeToSlide: true,
     accessibility: true,
     variableWidth: true,
@@ -39,7 +38,7 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
         },
       },
       {
-        breakpoint: 460,
+        breakpoint: 430,
         settings: {
           slidesToScroll: 1,
           speed: 300,
