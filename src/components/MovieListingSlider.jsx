@@ -14,31 +14,35 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
     initialSlide: 1,
     slidesToShow: 1,
     slidesToScroll: 5,
-    speed: 500,
+    speed: 700,
     cssEase: "linear",
     responsive: [
       {
         breakpoint: 1120,
         settings: {
           slidesToScroll: 4,
+          speed: 600,
         },
       },
       {
         breakpoint: 900,
         settings: {
           slidesToScroll: 3,
+          speed: 500,
         },
       },
       {
         breakpoint: 680,
         settings: {
           slidesToScroll: 2,
+          speed: 400,
         },
       },
       {
         breakpoint: 460,
         settings: {
           slidesToScroll: 1,
+          speed: 300,
         },
       },
     ],
@@ -47,7 +51,7 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
   return (
     <div className="movie-list pt-8">
       <Link to={`/TvFlix/movie/all/${path}`}>
-        <div className="hover:opacity-60">
+        <div className=" hover:opacity-60">
           <h3 className="mb-3 mr-2 inline-block text-[26px] font-bold tracking-[0.5px]">
             {title}
           </h3>
@@ -59,7 +63,7 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
         </div>
       </Link>
 
-      <div className="slider-homepage slick-custom group">
+      <div className="slick-custom">
         <Slider {...settings}>
           {movieSlider.length === 0 ? (
             <></>

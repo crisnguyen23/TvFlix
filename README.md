@@ -8,7 +8,7 @@
 
         TvFlix is a fully responsive movie website page.
 
-Responsive for all devices, built using ReactJS, Vite, Tailwind CSS, React-Router, React-Redux, Redux-Toolkit, Redux-Thunk, Axios, TMDB API, Tippy.
+Responsive for all devices, built using ReactJS, Vite, Tailwind CSS, React-Router, React-Redux, Redux-Toolkit, Redux-Thunk, Axios, TMDB API, Tippy, Slick, ...
 <br />
 <a href="https://crisnguyen23.github.io/TvFlix/"><strong>➥ Live Demo</strong></a>
 

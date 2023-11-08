@@ -134,9 +134,9 @@
   .sidebar:is(:hover, :focus-within)::-webkit-scrollbar-thumb {
     @apply bg-banner;
   }
-
+  /* w-[100px] flex-shrink-0 */
   .slider-item {
-    @apply w-[100px] flex-shrink-0 cursor-pointer rounded-lg brightness-100;
+    @apply mx-[6px] cursor-pointer rounded-lg brightness-100;
     box-shadow: 0 1px 4px hsla(0, 0%, 0%, 0.75);
   }
 
@@ -307,30 +307,55 @@
     .slick-slide {
       @apply mx-2;
     }
+
+    .slick-arrow {
+      @apply top-[150px] z-10 h-[30px] w-[30px] opacity-0 hover:opacity-100 tablet:opacity-50;
+    }
+
     .slick-prev {
-      @apply left-0 top-[150px] z-10 h-[30px] w-[30px];
+      @apply left-0;
     }
     .slick-prev::before {
-      @apply text-[50px] text-white opacity-50 hover:opacity-100;
-      transition: all 0.2s ease;
+      @apply text-[50px];
     }
-    .slick-prev:hover::before {
-      @apply opacity-100;
+    .slick-next {
+      @apply right-4;
+    }
+    .slick-next::before {
+      @apply text-[50px];
+    }
+  }
+
+  /* .slick-custom:hover ~ .poster-box {
+    @apply opacity-0;
+  } */
+
+  /* .slick-banner {
+    .slick-slide {
+      @apply mx-[6px];
+      filter: brightness(0.4);
+    }
+
+    .slick-current {
+      filter: brightness(1) !important;
+    }
+
+    .slick-arrow {
+      @apply top-[80px] z-10 h-[30px] w-[30px] opacity-50 hover:opacity-100;
+    }
+
+    .slick-prev {
+      @apply left-1;
+    }
+    .slick-prev::before {
+      @apply text-[30px];
     }
 
     .slick-next {
-      @apply right-4 top-[150px] z-10 h-[30px] w-[30px];
+      @apply right-0;
     }
     .slick-next::before {
-      @apply text-[50px] text-white opacity-50 hover:opacity-100;
-      transition: all 0.2s ease;
+      @apply text-[30px];
     }
-    .slick-next:hover::before {
-      @apply opacity-100;
-    }
-
-    /* .slick-arrow {
-      @apply h-[90px] w-[50px] bg-onSurfaceVariant opacity-0 hover:opacity-100;
-    } */
-  }
+  } */
 }
