@@ -11,7 +11,7 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
     swipeToSlide: true,
     accessibility: true,
     variableWidth: true,
-    initialSlide: 1,
+    initialSlide: 0,
     slidesToShow: 1,
     slidesToScroll: 5,
     speed: 700,

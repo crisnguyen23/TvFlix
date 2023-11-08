@@ -1,9 +1,7 @@
-import Slider from "react-slick";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
+// import Slider from "react-slick";
 
 import { imageBaseURL } from "../../utils/api";
 
@@ -34,18 +32,12 @@ const Banner = ({ data }) => {
   }
 
   // const settings = {
-  //   arrow: true,
+  //   dots: true,
   //   infinite: true,
-  //   swipeToSlide: true,
-  //   accessibility: true,
-  //   variableWidth: true,
-  //   initialSlide: 1,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 5,
   //   speed: 500,
-  //   cssEase: "linear",
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
   // };
-
   return (
     <>
       {data.length === 0 || genreChar === 0 ? (
