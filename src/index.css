@@ -85,7 +85,7 @@
   }
 
   .search-hover {
-    box-shadow: 0 0 0 2px hsla(250, 1%, 44%, 1);
+    box-shadow: 0 0 0 2px white;
   }
 
   .search-fade-in {
@@ -312,18 +312,20 @@
     .slick-arrow {
       @apply top-[150px] z-10 h-[30px] w-[30px] opacity-0 hover:opacity-100 tablet:opacity-30;
     }
+    .slick-arrow::before {
+      @apply text-[44px];
+    }
 
     .slick-prev {
       @apply left-0;
     }
-    .slick-prev::before {
-      @apply text-[44px];
-    }
+
     .slick-next {
       @apply right-4;
     }
-    .slick-next::before {
-      @apply text-[44px];
-    }
+
+    /* .slick-custom:hover ~ .slick-arrow {
+      @apply opacity-100;
+    } */
   }
 }

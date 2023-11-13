@@ -15,7 +15,15 @@ Responsive for all devices, built using ReactJS, Vite, Tailwind CSS, React-Route
   </div>
 <br />
 
-#Preview
+<h1>Features</h1>
+
+     1. Update real time list of movie.
+     2. Search all movies.
+     3. Choose movie by genre, countries, popular, top rated,...
+     4. Choose detail each movie for displaying info detail.
+     5. Watch trailer, tester of each movie.
+
+<h1>Preview</h1>
 
 ![TvFlix Desktop Demo](./readme-images/desktopHome.png "Desktop Demo")
 

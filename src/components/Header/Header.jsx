@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowSideBar, chooseGenre } from "../redux/movieSlice";
+import { setShowSideBar, chooseGenre } from "../../redux/movieSlice";
 
-import logo from "../assets/logos/logo.svg";
-import Search from "./Search/Search";
+import logo from "../../assets/logos/logo.svg";
+import Search from "./Search";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [showSearchBar, setShowSearchBar] = useState(false);
   const showSideBar = useSelector((state) => state.movies.showSideBar);
 
-  const setWindowDimensions = () => {
-    if (window.innerWidth > 768) {
-      setShowSearchBar(false);
-    }
-  };
-
   useEffect(() => {
+    const setWindowDimensions = () => {
+      if (window.innerWidth > 768) {
+        setShowSearchBar(false);
+      }
+    };
+
     window.addEventListener("resize", setWindowDimensions);
     return () => {
       window.removeEventListener("resize", setWindowDimensions);

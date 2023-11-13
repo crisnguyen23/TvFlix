@@ -90,7 +90,7 @@ export const fetchSearchPage = createAsyncThunk(
 
 // --------------Call MovieGenrePage--------------
 export const fetchGenreList = createAsyncThunk(
-  "movies/fetchGenreList",
+  "movies/fetchGenreList", //action.type
   async () => {
     const res = await tmdbAPI.get(`/genre/movie/list`, {
       params: {
@@ -159,7 +159,7 @@ export const fetchMovieDetail = createAsyncThunk(
 );
 
 export const fetchMovieSimilar = createAsyncThunk(
-  "movies/fetchMovieSimilar",
+  "movies/fetchMovieSimilar", //prefix of action
   async (id) => {
     const res = await tmdbAPI.get(`/movie/${id}/similar`, {
       params: {
@@ -170,7 +170,7 @@ export const fetchMovieSimilar = createAsyncThunk(
     });
     return res.data.results;
   },
-);
+); //return thunk action
 
 const movieSlice = createSlice({
   name: "movies",
@@ -193,8 +193,10 @@ const movieSlice = createSlice({
     movieSimilar: [],
   },
   reducers: {
+    //standard reducers logic
+    //auto gen an action type per reducer //{ type: 'name/nameaction'}
     chooseGenre: (state, action) => {
-      state.genreChoosing = action.payload;
+      state.genreChoosing = action.payload; //mutation due to Immer Lib
     },
     setShowSideBar: (state, action) => {
       state.showSideBar = action.payload;
@@ -203,14 +205,21 @@ const movieSlice = createSlice({
       state.searchResults = [];
       state.showTippy = false;
     },
+    removeSearchPage: (state) => {
+      state.searchPage = [];
+    },
     removeMovieList: (state) => {
       state.movieList = [];
     },
     removeMovieDetail: (state) => {
       state.movieDetail = [];
     },
+    removeMovieSimilar: (state) => {
+      state.movieSimilar = [];
+    },
   },
   extraReducers: (builder) => {
+    // Add reducers for additional action types here, and handle loading state as needed
     builder
       .addCase(fetchMovieTrendingWeek.pending, (state) => {
         state.loadingPage = false;
@@ -276,6 +285,9 @@ export const {
   setShowSideBar,
   removeSearchResults,
   removeMovieDetail,
+  removeMovieSimilar,
   removeMovieList,
+  removeSearchPage,
 } = movieSlice.actions;
-export default movieSlice.reducer;
+
+export default movieSlice.reducer; //inside reducer has also state, dispatch

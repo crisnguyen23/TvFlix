@@ -6,8 +6,9 @@ import {
   fetchMovieDetail,
   fetchMovieSimilar,
   removeMovieDetail,
+  removeMovieSimilar,
 } from "../redux/movieSlice";
-import { MovieListingSlider } from "../components";
+import { MovieListingSlider, Loading } from "../components";
 import { imageBaseURL } from "../utils/api";
 
 const MovieDetailPage = () => {
@@ -55,20 +56,14 @@ const MovieDetailPage = () => {
 
     return () => {
       dispatch(removeMovieDetail());
+      dispatch(removeMovieSimilar());
     };
   }, [id]);
 
   return (
     <div className="containerr">
       {data.length === 0 ? (
-        <div className="ml-4 mt-10">
-          <div className="inline-block translate-y-[26px]">
-            <i className="fa-solid fa-circle-notch loading-search w-[46px] text-[46px] text-primary"></i>
-          </div>
-          <div className="heading ml-[16px] inline-block text-[44px]">
-            Loading....
-          </div>
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="movie-detail tablet:flex tablet:items-start tablet:gap-10">
@@ -80,7 +75,7 @@ const MovieDetailPage = () => {
                 })`,
               }}
             ></div>
-            <div className="poster-box tablet:sticky tablet:flex-shrink-0 tablet:top-0 w-full max-w-[300px]">
+            <div className="poster-box w-full max-w-[300px] tablet:sticky tablet:top-0 tablet:flex-shrink-0">
               <img
                 src={`${imageBaseURL}/original/${poster_path}`}
                 alt={`${title}`}
@@ -127,7 +122,7 @@ const MovieDetailPage = () => {
                   Trailers and Clips
                 </h3>
               </div>
-              <div className="slider-large tablet:ml-0 ml-[2px] rounded-2xl">
+              <div className="slider-large ml-[2px] rounded-2xl tablet:ml-0">
                 <div className="slider-inner relative flex gap-4 ">
                   {filterVideos(videos.results)
                     .slice(0, 5)

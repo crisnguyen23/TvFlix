@@ -8,6 +8,7 @@ import {
   setShowSideBar,
   fetchSearchMovies,
   removeSearchResults,
+  removeSearchPage,
 } from "../../redux/movieSlice";
 import MovieItemSearch from "./MovieItemSearch";
 import useDebounce from "../../hooks/useDebounce";
@@ -18,6 +19,7 @@ const Search = ({ size, focus }) => {
   const [searchValue, setSearchValue] = useState("");
   const debouncedValue = useDebounce(searchValue, 600);
   const [showResult, setShowResult] = useState(false);
+
   const searchResult = useSelector((state) => state.movies.searchResults);
   const statusLoading = useSelector((state) => state.movies.statusLoading);
   const showTippy = useSelector((state) => state.movies.showTippy);
@@ -65,6 +67,7 @@ const Search = ({ size, focus }) => {
                 onClick={() => {
                   dispatch(chooseGenre(""));
                   dispatch(setShowSideBar(false));
+                  dispatch(removeSearchPage());
                 }}
               >
                 {`View all results for "${searchValue}"`}

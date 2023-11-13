@@ -1,8 +1,9 @@
 import Slider from "react-slick";
-import MovieCard from "./MovieCard";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import MovieCard from "./MovieCard";
 
 const MovieListingSlider = ({ title, movieSlider, path }) => {
   const settings = {
