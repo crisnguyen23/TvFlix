@@ -9,6 +9,7 @@ import {
   fetchSearchMovies,
   removeSearchResults,
   removeSearchPage,
+  setCurrentPage,
 } from "../../redux/movieSlice";
 import MovieItemSearch from "./MovieItemSearch";
 import useDebounce from "../../hooks/useDebounce";
@@ -27,7 +28,6 @@ const Search = ({ size, focus }) => {
   useEffect(() => {
     // first time render => prevent fetchSearchMovies
     if (!debouncedValue.trim()) {
-      dispatch(removeSearchResults());
       return;
     }
     dispatch(fetchSearchMovies(debouncedValue));
@@ -68,6 +68,7 @@ const Search = ({ size, focus }) => {
                   dispatch(chooseGenre(""));
                   dispatch(setShowSideBar(false));
                   dispatch(removeSearchPage());
+                  dispatch(setCurrentPage(2));
                 }}
               >
                 {`View all results for "${searchValue}"`}

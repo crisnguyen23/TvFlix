@@ -21,9 +21,9 @@ import {
 } from "./pages";
 
 function App() {
+  const dispatch = useDispatch();
   const loadingPage = useSelector((state) => state.movies.loadingPage);
   const [watchLoading, setWatchLoading] = useState(false);
-  const dispatch = useDispatch();
 
   setTimeout(() => {
     setWatchLoading(true);

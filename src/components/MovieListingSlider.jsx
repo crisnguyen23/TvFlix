@@ -1,11 +1,19 @@
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import MovieCard from "./MovieCard";
+import {
+  setCurrentPage,
+  fetchMoviePopular,
+  fetchMovieUpcoming,
+  fetchMovieTopRated,
+} from "../redux/movieSlice";
 
 const MovieListingSlider = ({ title, movieSlider, path }) => {
+  const dispatch = useDispatch();
   const settings = {
     arrow: true,
     swipeToSlide: true,
@@ -48,10 +56,27 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
     ],
   };
 
+  const handleOnClick = () => {
+    dispatch(setCurrentPage(2));
+    switch (title) {
+      case "Upcoming Movies":
+        dispatch(fetchMovieUpcoming());
+        break;
+      case "Popular Movies":
+        dispatch(fetchMoviePopular());
+        break;
+      case "Top Rated Movies":
+        dispatch(fetchMovieTopRated());
+        break;
+      default:
+        throw new Error("Error path!");
+    }
+  };
+
   return (
     <div className="movie-list pt-8">
       <Link to={`/TvFlix/movie/all/${path}`}>
-        <div className=" hover:opacity-60">
+        <div className=" hover:opacity-60" onClick={handleOnClick}>
           <h3 className="mb-3 mr-2 inline-block text-[26px] font-bold tracking-[0.5px]">
             {title}
           </h3>

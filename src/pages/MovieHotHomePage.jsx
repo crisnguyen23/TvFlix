@@ -1,16 +1,17 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MovieGridList } from "../components";
-import { fetchLoadMoreMovie } from "../redux/movieSlice";
+import { fetchLoadMoreMovie, setCurrentPage } from "../redux/movieSlice";
 
 const MovieHotHomePage = () => {
-  let key = "";
   const dispatch = useDispatch();
   const { path, title } = useParams();
-  const [currentPage, setCurrentPage] = useState(2);
+  const currentPage = useSelector((state) => state.movies.currentPage);
   const loadingBtnLoadMore = useSelector(
     (state) => state.movies.loadingBtnLoadMore,
+  );
+  const displayLoadMoreBtn = useSelector(
+    (state) => state.movies.displayLoadMoreBtn,
   );
 
   let data = [];
@@ -29,7 +30,7 @@ const MovieHotHomePage = () => {
   }
 
   const handleLoadMoreMovie = () => {
-    setCurrentPage((currentPage) => currentPage + 1);
+    dispatch(setCurrentPage(currentPage + 1));
     dispatch(fetchLoadMoreMovie({ path, currentPage }));
   };
 
@@ -48,7 +49,7 @@ const MovieHotHomePage = () => {
         <>
           <div className="genre-list pt-8">
             <div className="title mb-[56px]">
-              <h1 className="heading tablet:text-[54px] text-[46px] tracking-[3px]">
+              <h1 className="heading text-[46px] tracking-[3px] tablet:text-[54px]">
                 {`All ${title} Movies`}
               </h1>
             </div>
@@ -57,6 +58,7 @@ const MovieHotHomePage = () => {
           <button
             className="btn mx-auto mb-[60px] mt-9 bg-primaryVariant"
             onClick={handleLoadMoreMovie}
+            style={{ display: displayLoadMoreBtn ? "block" : "none" }}
           >
             <div>
               <div

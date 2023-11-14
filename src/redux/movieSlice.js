@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { APIKey } from "../utils/api";
 import tmdbAPI from "../utils/httpRequest";
 
-// ----------Call API Home Page--------------
+// ----------Fetch API Home Page--------------
 export const fetchMovieTrendingWeek = createAsyncThunk(
   "movies/fetchMovieTrendingWeek",
   async () => {
@@ -59,7 +59,21 @@ export const fetchMoviePopular = createAsyncThunk(
   },
 );
 
-// --------------Call search movie API-----------
+export const fetchLoadMoreMovie = createAsyncThunk(
+  "movies/fetchLoadMoreMovie",
+  async ({ path, currentPage }) => {
+    const res = await tmdbAPI.get(`/movie/${path}`, {
+      params: {
+        api_key: APIKey,
+        language: "en-US",
+        page: currentPage,
+      },
+    });
+    return res.data.results;
+  },
+);
+
+// --------------Fetch search movie API-----------
 export const fetchSearchMovies = createAsyncThunk(
   "movies/fechSearchMovies",
   async (searchValue) => {
@@ -76,19 +90,33 @@ export const fetchSearchMovies = createAsyncThunk(
 
 export const fetchSearchPage = createAsyncThunk(
   "movies/fetchSearchPage",
-  async (searchValue) => {
+  async (keyword) => {
     const res = await tmdbAPI.get("/search/movie", {
       params: {
         api_key: APIKey,
         page: 1,
-        query: searchValue,
+        query: keyword,
       },
     });
     return res.data.results;
   },
 );
 
-// --------------Call MovieGenrePage--------------
+export const fetchLoadMoreSearchPage = createAsyncThunk(
+  "movies/fetchLoadMoreSearchPage",
+  async ({ keyword, currentPage }) => {
+    const res = await tmdbAPI.get("/search/movie", {
+      params: {
+        api_key: APIKey,
+        page: currentPage,
+        query: keyword,
+      },
+    });
+    return res.data.results;
+  },
+);
+
+// --------------Fetch MovieGenrePage--------------
 export const fetchGenreList = createAsyncThunk(
   "movies/fetchGenreList", //action.type
   async () => {
@@ -130,20 +158,6 @@ export const fetchMoreMovieGenre = createAsyncThunk(
   },
 );
 
-export const fetchLoadMoreMovie = createAsyncThunk(
-  "movies/fetchLoadMoreMovie",
-  async ({ path, currentPage }) => {
-    const res = await tmdbAPI.get(`/movie/${path}`, {
-      params: {
-        api_key: APIKey,
-        language: "en-US",
-        page: currentPage,
-      },
-    });
-    return res.data.results;
-  },
-);
-
 // ---------Call Movie Detail Page-------------
 export const fetchMovieDetail = createAsyncThunk(
   "movies/fetchMovieDetail",
@@ -177,7 +191,9 @@ const movieSlice = createSlice({
   initialState: {
     loadingPage: "",
     loadingBtnLoadMore: false,
+    displayLoadMoreBtn: true,
     statusLoading: false,
+    currentPage: 2,
     showTippy: false,
     genreChoosing: "",
     showSideBar: false,
@@ -201,6 +217,9 @@ const movieSlice = createSlice({
     setShowSideBar: (state, action) => {
       state.showSideBar = action.payload;
     },
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
     removeSearchResults: (state) => {
       state.searchResults = [];
       state.showTippy = false;
@@ -221,6 +240,7 @@ const movieSlice = createSlice({
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder
+      //---------------Fetch Home Page----------------
       .addCase(fetchMovieTrendingWeek.pending, (state) => {
         state.loadingPage = false;
       })
@@ -230,13 +250,29 @@ const movieSlice = createSlice({
       })
       .addCase(fetchMovieUpcoming.fulfilled, (state, action) => {
         state.movieUpcoming = action.payload;
+        state.displayLoadMoreBtn = true;
       })
       .addCase(fetchMovieTopRated.fulfilled, (state, action) => {
         state.movieTopRated = action.payload;
+        state.displayLoadMoreBtn = true;
       })
       .addCase(fetchMoviePopular.fulfilled, (state, action) => {
         state.moviePopular = action.payload;
+        state.displayLoadMoreBtn = true;
       })
+      .addCase(fetchLoadMoreMovie.pending, (state) => {
+        state.loadingBtnLoadMore = true;
+      })
+      .addCase(fetchLoadMoreMovie.fulfilled, (state, action) => {
+        state.loadingBtnLoadMore = false;
+        if (action.payload.length < 20) {
+          state.displayLoadMoreBtn = false;
+        }
+        state.movieUpcoming = [...state.movieUpcoming, ...action.payload];
+        state.movieTopRated = [...state.movieTopRated, ...action.payload];
+        state.moviePopular = [...state.moviePopular, ...action.payload];
+      })
+      //------------Fetch Search Movie-----------
       .addCase(fetchSearchMovies.pending, (state) => {
         state.statusLoading = true;
         state.showTippy = false;
@@ -248,29 +284,37 @@ const movieSlice = createSlice({
       })
       .addCase(fetchSearchPage.fulfilled, (state, action) => {
         state.searchPage = action.payload;
+        state.displayLoadMoreBtn = true;
       })
+      .addCase(fetchLoadMoreSearchPage.pending, (state) => {
+        state.loadingBtnLoadMore = true;
+      })
+      .addCase(fetchLoadMoreSearchPage.fulfilled, (state, action) => {
+        state.searchPage = [...state.searchPage, ...action.payload];
+        state.loadingBtnLoadMore = false;
+        if (action.payload.length < 20) {
+          state.displayLoadMoreBtn = false;
+        }
+      })
+      //------------Fetch movie by genre-------
       .addCase(fetchGenreList.fulfilled, (state, action) => {
         state.genreList = action.payload;
       })
       .addCase(fetchMovieListGenre.fulfilled, (state, action) => {
         state.movieList = action.payload;
+        state.displayLoadMoreBtn = true;
       })
       .addCase(fetchMoreMovieGenre.pending, (state) => {
         state.loadingBtnLoadMore = true;
       })
       .addCase(fetchMoreMovieGenre.fulfilled, (state, action) => {
         state.movieList = [...state.movieList, ...action.payload];
+        if (action.payload.length < 20) {
+          state.displayLoadMoreBtn = false;
+        }
         state.loadingBtnLoadMore = false;
       })
-      .addCase(fetchLoadMoreMovie.pending, (state) => {
-        state.loadingBtnLoadMore = true;
-      })
-      .addCase(fetchLoadMoreMovie.fulfilled, (state, action) => {
-        state.loadingBtnLoadMore = false;
-        state.movieUpcoming = [...state.movieUpcoming, ...action.payload];
-        state.movieTopRated = [...state.movieTopRated, ...action.payload];
-        state.moviePopular = [...state.moviePopular, ...action.payload];
-      })
+      //---------Fetch movie detail page--------
       .addCase(fetchMovieDetail.fulfilled, (state, action) => {
         state.movieDetail = action.payload;
       })
@@ -283,6 +327,7 @@ const movieSlice = createSlice({
 export const {
   chooseGenre,
   setShowSideBar,
+  setCurrentPage,
   removeSearchResults,
   removeMovieDetail,
   removeMovieSimilar,
@@ -290,4 +335,4 @@ export const {
   removeSearchPage,
 } = movieSlice.actions;
 
-export default movieSlice.reducer; //inside reducer has also state, dispatch
+export default movieSlice.reducer; //inside reducer include state, update state

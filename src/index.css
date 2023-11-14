@@ -323,9 +323,5 @@
     .slick-next {
       @apply right-4;
     }
-
-    /* .slick-custom:hover ~ .slick-arrow {
-      @apply opacity-100;
-    } */
   }
 }

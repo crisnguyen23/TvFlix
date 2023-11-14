@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MovieGridList, Loading } from "../components";
@@ -6,16 +6,20 @@ import {
   fetchMovieListGenre,
   fetchMoreMovieGenre,
   removeMovieList,
+  setCurrentPage,
 } from "../redux/movieSlice";
 
 const MovieGenrePage = () => {
   let key = "";
   const dispatch = useDispatch();
   const { genre, id } = useParams();
-  const [currentPage, setCurrentPage] = useState(2);
+  const currentPage = useSelector((state) => state.movies.currentPage);
   const movieList = useSelector((state) => state.movies.movieList);
   const loadingBtnLoadMore = useSelector(
     (state) => state.movies.loadingBtnLoadMore,
+  );
+  const displayLoadMoreBtn = useSelector(
+    (state) => state.movies.displayLoadMoreBtn,
   );
 
   if (isNaN(id)) {
@@ -33,7 +37,7 @@ const MovieGenrePage = () => {
   }, [id]);
 
   const handleLoadMoreMovie = () => {
-    setCurrentPage((currentPage) => currentPage + 1);
+    dispatch(setCurrentPage(currentPage + 1));
     dispatch(fetchMoreMovieGenre({ key, id, currentPage }));
   };
 
@@ -54,6 +58,7 @@ const MovieGenrePage = () => {
           <button
             className="btn mx-auto mb-[60px] mt-9 bg-primaryVariant"
             onClick={handleLoadMoreMovie}
+            style={{ display: displayLoadMoreBtn ? "block" : "none" }}
           >
             <div>
               <div

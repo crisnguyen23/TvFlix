@@ -20,6 +20,7 @@ const Banner = ({ data }) => {
       overview,
     } = data[currentIndex];
 
+    //convert gene,id to gene name (render)
     var genreChar = [];
 
     if (genreList.length > 0) {
