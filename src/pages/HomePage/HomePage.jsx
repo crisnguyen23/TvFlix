@@ -1,13 +1,12 @@
 import { useSelector } from "react-redux";
 import Banner from "./Banner";
-import { MovieListingSlider } from "../../components";
+import { MovieListingSlider } from "@/components";
 
-const Home = () => {
+const HomePage = () => {
   const movieTrending = useSelector((state) => state.movies.movieTrending);
   const moviePopular = useSelector((state) => state.movies.moviePopular);
   const movieUpcoming = useSelector((state) => state.movies.movieUpcoming);
   const movieTopRated = useSelector((state) => state.movies.movieTopRated);
-
   return (
     <div className="containerr">
       <Banner data={movieTrending.slice(0, 10)} />
@@ -30,4 +29,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

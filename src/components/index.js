@@ -1,6 +1,10 @@
-export { default as Header } from "./Header/Header";
-export { default as Search } from "./Header/Search";
-export { default as Sidebar } from "./Sidebar/Sidebar";
-export { default as MovieListingSlider } from "./MovieListingSlider";
-export { default as MovieGridList } from "./MovieGridList";
-export { default as Loading } from "./Loading";
+export { default as Header } from "./common/Header/Header";
+export { default as Search } from "./common/Header/Search";
+export { default as Sidebar } from "./common/Sidebar/Sidebar";
+export { default as MovieListingSlider } from "./common/MovieListingSlider";
+export { default as MovieGridList } from "./common/MovieGridList";
+export { default as LoadingPage } from "./common/LoadingPage";
+export { default as AuthModal } from "./common/AuthenModal/AuthModal";
+export { default as MainLayout } from "./layout/MainLayout";
+export { default as UpdatePasswordLayout } from "./layout/UpdatePasswordLayout";
+export { default as GlobalLoading } from "./common/GlobalLoading";

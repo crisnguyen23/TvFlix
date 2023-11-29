@@ -2,7 +2,8 @@
   "name": "05movieflixpro",
   "homepage": "https://crisnguyen23.github.io/TvFlix/",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "Cris Nguyen",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -22,6 +23,7 @@
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.18.0",
     "react-slick": "^0.29.0",
+    "react-toastify": "^9.1.3",
     "redux": "^4.2.1",
     "slick-carousel": "^1.8.1"
   },

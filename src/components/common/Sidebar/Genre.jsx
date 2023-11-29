@@ -5,7 +5,7 @@ import {
   chooseGenre,
   setShowSideBar,
   setCurrentPage,
-} from "../../redux/movieSlice";
+} from "@/redux/movieSlice";
 
 const Genre = ({ name, id }) => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { MovieGridList } from "../components";
-import { fetchLoadMoreMovie, setCurrentPage } from "../redux/movieSlice";
+import { MovieGridList } from "@/components";
+import { fetchLoadMoreMovie, setCurrentPage } from "@/redux/movieSlice";
 
 const MovieHotHomePage = () => {
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ const MovieHotHomePage = () => {
           </div>
           <button
             className="btn mx-auto mb-[60px] mt-9 bg-primaryVariant"
-            onClick={handleLoadMoreMovie}
+            onClick={() => handleLoadMoreMovie()}
             style={{ display: displayLoadMoreBtn ? "block" : "none" }}
           >
             <div>

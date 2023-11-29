@@ -1,4 +1,4 @@
-const Loading = () => {
+const LoadingPage = () => {
   return (
     <div className="ml-4 mt-10">
       <div className="inline-block translate-y-[26px]">
@@ -11,4 +11,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LoadingPage;

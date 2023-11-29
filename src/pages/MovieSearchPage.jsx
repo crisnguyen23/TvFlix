@@ -6,8 +6,8 @@ import {
   fetchSearchPage,
   fetchLoadMoreSearchPage,
   setCurrentPage,
-} from "../redux/movieSlice";
-import { MovieGridList, Loading } from "../components";
+} from "@/redux/movieSlice";
+import { MovieGridList, LoadingPage } from "@/components";
 
 const MovieSearchPage = () => {
   const { keyword } = useParams();
@@ -34,7 +34,7 @@ const MovieSearchPage = () => {
   return (
     <section className="containerr">
       {searchResult.length === 0 ? (
-        <Loading />
+        <LoadingPage />
       ) : (
         <>
           <div className="movie-list pt-8">
@@ -46,23 +46,27 @@ const MovieSearchPage = () => {
             </h1>
             <MovieGridList movieList={searchResult} />
           </div>
-          <button
-            className="btn mx-auto mb-[60px] mt-9 bg-primaryVariant"
-            onClick={handleLoadMoreMovie}
-            style={{ display: displayLoadMoreBtn ? "block" : "none" }}
-          >
-            <div>
-              <div
-                className="none mr-[6px] translate-y-[7px]"
-                style={{
-                  display: loadingBtnLoadMore ? "inline-block" : "none",
-                }}
-              >
-                <i className="fa-solid fa-circle-notch loading-search w-[15px] text-[15px] text-white" />
+          {searchResult.length < 20 ? (
+            <></>
+          ) : (
+            <button
+              className="btn mx-auto mb-[60px] mt-9 bg-primaryVariant"
+              onClick={() => handleLoadMoreMovie()}
+              style={{ display: displayLoadMoreBtn ? "block" : "none" }}
+            >
+              <div>
+                <div
+                  className="none mr-[6px] translate-y-[7px]"
+                  style={{
+                    display: loadingBtnLoadMore ? "inline-block" : "none",
+                  }}
+                >
+                  <i className="fa-solid fa-circle-notch loading-search w-[15px] text-[15px] text-white" />
+                </div>
+                Load More
               </div>
-              Load More
-            </div>
-          </button>
+            </button>
+          )}
         </>
       )}
     </section>

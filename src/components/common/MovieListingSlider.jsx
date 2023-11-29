@@ -10,7 +10,7 @@ import {
   fetchMoviePopular,
   fetchMovieUpcoming,
   fetchMovieTopRated,
-} from "../redux/movieSlice";
+} from "@/redux/movieSlice";
 
 const MovieListingSlider = ({ title, movieSlider, path }) => {
   const dispatch = useDispatch();
@@ -76,8 +76,8 @@ const MovieListingSlider = ({ title, movieSlider, path }) => {
   return (
     <div className="movie-list pt-8">
       <Link to={`/TvFlix/movie/all/${path}`}>
-        <div className=" hover:opacity-60" onClick={handleOnClick}>
-          <h3 className="mb-3 mr-2 inline-block text-[26px] font-bold tracking-[0.5px]">
+        <div className=" hover:opacity-60" onClick={() => handleOnClick()}>
+          <h3 className="mb-4 mr-2 inline-block border-b-4 border-solid border-primary text-[26px] font-bold tracking-[0.5px]">
             {title}
           </h3>
           {path ? (

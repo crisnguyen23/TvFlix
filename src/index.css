@@ -58,9 +58,9 @@
   }
 
   /* Animation */
-  :focus-visible {
-    @apply outline-primaryVariant;
-  }
+  /* :focus-visible {
+    @apply outline-white;
+  } */
 
   ::-webkit-scrollbar {
     @apply h-2 w-2;
@@ -84,6 +84,22 @@
     @apply absolute right-0 top-1/2 translate-y-[-50%] p-2 text-xl opacity-50;
   }
 
+  .btn {
+    @apply transition-short flex max-w-max items-center justify-center gap-3 rounded-lg bg-primary py-3 pl-5 pr-6 text-[15px] font-bold text-white hover:opacity-[0.65];
+  }
+
+  .wrap-input-form {
+    @apply transition-short rounded-[4px];
+  }
+
+  .input-form {
+    @apply h-[48px] rounded-[4px] border-[1px] border-solid border-[#444] bg-background px-[14px] py-[16px]  hover:border-white focus:border-white focus:outline-0;
+  }
+
+  .text-validation {
+    @apply ml-2 mt-1 text-[13px] text-primary;
+  }
+
   .search-hover {
     box-shadow: 0 0 0 2px white;
   }
@@ -104,7 +120,7 @@
   }
 
   .btn-bg {
-    @apply h-12 w-12 cursor-pointer rounded-lg bg-banner text-center text-lg leading-[48px]  tablet:hidden;
+    @apply h-12 w-12 cursor-pointer rounded-lg bg-banner text-center text-lg leading-[48px] tablet:hidden;
   }
 
   .sidebar-list {
@@ -224,10 +240,6 @@
     row-gap: 20px;
   }
 
-  .btn {
-    @apply transition-short flex max-w-max items-center gap-3 rounded-lg bg-primary py-3 pl-5 pr-6 text-[15px] font-bold text-white hover:opacity-[0.65];
-  }
-
   .slider-item {
     @apply w-[100px] flex-shrink-0 cursor-pointer rounded-lg brightness-100;
     transition: opacity 500ms ease;
@@ -255,6 +267,13 @@
 
   .boxshadow-searchfield:focus {
     box-shadow: 0 0 0 2px hsla(250, 100%, 95%, 1);
+  }
+
+  .boxshadow-authmodal {
+    box-shadow:
+      rgba(0, 0, 0, 0.2) 0px 11px 15px -7px,
+      rgba(0, 0, 0, 0.14) 0px 24px 38px 3px,
+      rgba(0, 0, 0, 0.12) 0px 9px 46px 8px;
   }
 
   .transition-short {

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { imageBaseURL } from "../utils/api";
+import { imageBaseURL } from "@/utils/api";
 
 const MovieCard = ({ size, data }) => {
   return (

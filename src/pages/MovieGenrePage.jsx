@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { MovieGridList, Loading } from "../components";
+import { MovieGridList, LoadingPage } from "@/components";
 import {
   fetchMovieListGenre,
   fetchMoreMovieGenre,
   removeMovieList,
   setCurrentPage,
-} from "../redux/movieSlice";
+} from "@/redux/movieSlice";
 
 const MovieGenrePage = () => {
   let key = "";
@@ -44,7 +44,7 @@ const MovieGenrePage = () => {
   return (
     <section className="containerr">
       {movieList.length === 0 ? (
-        <Loading />
+        <LoadingPage />
       ) : (
         <>
           <div className="genre-list pt-8">
@@ -57,7 +57,7 @@ const MovieGenrePage = () => {
           </div>
           <button
             className="btn mx-auto mb-[60px] mt-9 bg-primaryVariant"
-            onClick={handleLoadMoreMovie}
+            onClick={() => handleLoadMoreMovie()}
             style={{ display: displayLoadMoreBtn ? "block" : "none" }}
           >
             <div>

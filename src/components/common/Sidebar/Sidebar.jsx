@@ -1,9 +1,9 @@
-import { setShowSideBar } from "../../redux/movieSlice";
+import { setShowSideBar } from "@/redux/movieSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 import Genre from "./Genre";
-import logoTMDB from "../../assets/logos/tmdb-logo.svg";
-import copyrighticon from "../../assets/icons/copyright-sign.svg";
+import logoTMDB from "@/assets/logos/tmdb-logo.svg";
+import copyrighticon from "@/assets/icons/copyright-sign.svg";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const Sidebar = () => {
 
   return (
     <nav
-      className="sidebar desktop:h-desktop h-tablet top-s[96px] overflow-y-overlay transition-long absolute bottom-0 z-[10] max-w-[340px] bg-background desktop:static desktop:border-t-0"
+      className="sidebar desktop:h-desktop h-tablet overflow-y-overlay transition-long absolute bottom-0 top-[96px] z-[10] max-w-[340px] bg-background desktop:static desktop:border-t-0"
       style={{ left: showSideBar ? "0" : "-250px" }}
     >
       <div className="sidebar-inner grid gap-5 pb-3 pt-9 ">
@@ -75,9 +75,7 @@ const Sidebar = () => {
       <section
         className="overlay transition-sidebar fixed bottom-0  left-[250px] top-[96px] z-[3] w-full bg-background opacity-50"
         hidden={!showSideBar}
-        onClick={() => {
-          dispatch(setShowSideBar(false));
-        }}
+        onClick={() => dispatch(setShowSideBar(false))}
       ></section>
     </nav>
   );

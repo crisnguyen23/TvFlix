@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { imageBaseURL } from "../../utils/api";
-import { chooseGenre, setShowSideBar } from "../../redux/movieSlice";
+import { imageBaseURL } from "@/utils/api";
+import { chooseGenre, setShowSideBar } from "@/redux/movieSlice";
 
 const MovieItemSearch = ({ data }) => {
   const dispatch = useDispatch();

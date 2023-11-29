@@ -10,9 +10,9 @@ import {
   removeSearchResults,
   removeSearchPage,
   setCurrentPage,
-} from "../../redux/movieSlice";
+} from "@/redux/movieSlice";
 import MovieItemSearch from "./MovieItemSearch";
-import useDebounce from "../../hooks/useDebounce";
+import useDebounce from "@/hooks/useDebounce";
 
 const Search = ({ size, focus }) => {
   const inputRef = useRef();
@@ -102,7 +102,7 @@ const Search = ({ size, focus }) => {
         {!!searchValue && !statusLoading && (
           <i
             className="fa-solid fa-circle-xmark loading-icon cursor-pointer hover:opacity-100"
-            onClick={handleClear}
+            onClick={() => handleClear()}
           ></i>
         )}
 

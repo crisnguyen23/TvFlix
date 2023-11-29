@@ -7,9 +7,9 @@ import {
   fetchMovieSimilar,
   removeMovieDetail,
   removeMovieSimilar,
-} from "../redux/movieSlice";
-import { MovieListingSlider, Loading } from "../components";
-import { imageBaseURL } from "../utils/api";
+} from "@/redux/movieSlice";
+import { MovieListingSlider, LoadingPage } from "@/components";
+import { imageBaseURL } from "@/utils/api";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -63,7 +63,7 @@ const MovieDetailPage = () => {
   return (
     <div className="containerr">
       {data.length === 0 ? (
-        <Loading />
+        <LoadingPage />
       ) : (
         <>
           <div className="movie-detail tablet:flex tablet:items-start tablet:gap-10">

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { APIKey } from "../utils/api";
-import tmdbAPI from "../utils/httpRequest";
+import { APIKey } from "@/utils/api";
+import tmdbAPI from "@/utils/httpRequest";
 
 // ----------Fetch API Home Page--------------
 export const fetchMovieTrendingWeek = createAsyncThunk(
@@ -195,6 +195,7 @@ const movieSlice = createSlice({
     statusLoading: false,
     currentPage: 2,
     showTippy: false,
+    showAuthModal: false,
     genreChoosing: "",
     showSideBar: false,
     searchResults: [],
@@ -216,6 +217,9 @@ const movieSlice = createSlice({
     },
     setShowSideBar: (state, action) => {
       state.showSideBar = action.payload;
+    },
+    setShowAuthModal: (state, action) => {
+      state.showAuthModal = action.payload;
     },
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
@@ -320,6 +324,9 @@ const movieSlice = createSlice({
       })
       .addCase(fetchMovieSimilar.fulfilled, (state, action) => {
         state.movieSimilar = action.payload;
+      })
+      .addCase(fetchMovieSimilar.rejected, () => {
+        throw new Error("Failed to fetch movieSimilar");
       });
   },
 });
@@ -328,6 +335,7 @@ export const {
   chooseGenre,
   setShowSideBar,
   setCurrentPage,
+  setShowAuthModal,
   removeSearchResults,
   removeMovieDetail,
   removeMovieSimilar,

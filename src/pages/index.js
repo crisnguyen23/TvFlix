@@ -1,4 +1,4 @@
-export { default as Home } from "./Home/Home";
+export { default as HomePage } from "./HomePage/HomePage";
 export { default as MovieHotHomePage } from "./MovieHotHomePage";
 export { default as MovieDetailPage } from "./MovieDetailPage";
 export { default as MovieGenrePage } from "./MovieGenrePage";
