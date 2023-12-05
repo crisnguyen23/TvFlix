@@ -22,7 +22,7 @@ const SignInFrom = ({ switchAuthState }) => {
   }, [emailBlur]);
 
   useEffect(() => {
-    setPasswordValid(passwordValue.trim().length > 8);
+    setPasswordValid(passwordValue.trim().length > 7);
   }, [passwordBlur]);
 
   const handleSignIn = (e) => {

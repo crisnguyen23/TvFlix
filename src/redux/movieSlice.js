@@ -158,7 +158,7 @@ export const fetchMoreMovieGenre = createAsyncThunk(
   },
 );
 
-// ---------Call Movie Detail Page-------------
+// ---------Fetch Movie Detail Page-------------
 export const fetchMovieDetail = createAsyncThunk(
   "movies/fetchMovieDetail",
   async (id) => {
@@ -210,8 +210,8 @@ const movieSlice = createSlice({
     movieSimilar: [],
   },
   reducers: {
-    //standard reducers logic
-    //auto gen an action type per reducer //{ type: 'name/nameaction'}
+    // standard reducers logic
+    // auto gen an action type per reducer //{ type: 'name/nameaction'}
     chooseGenre: (state, action) => {
       state.genreChoosing = action.payload; //mutation due to Immer Lib
     },
@@ -343,4 +343,4 @@ export const {
   removeSearchPage,
 } = movieSlice.actions;
 
-export default movieSlice.reducer; //inside reducer include state, update state
+export default movieSlice.reducer; //inside reducer include state, action update state
