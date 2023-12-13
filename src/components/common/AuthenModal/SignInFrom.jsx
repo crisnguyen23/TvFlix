@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const SignInFrom = ({ switchAuthState }) => {
   const emailRef = useRef();
@@ -28,6 +29,7 @@ const SignInFrom = ({ switchAuthState }) => {
   const handleSignIn = (e) => {
     e.preventDefault();
     setPasswordBlur(true);
+    toast.error("Sign in error!");
   };
 
   return (

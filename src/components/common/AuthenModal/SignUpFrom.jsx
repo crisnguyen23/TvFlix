@@ -55,7 +55,7 @@ const SignUpFrom = ({ switchAuthState }) => {
     if (!nameValid || !emailValid || !passwordValid || !cfPasswordValid) {
       return;
     }
-    toast.success("Sign in success!");
+    toast.success("Sign up success!");
     setSuccess(true);
     switchAuthState();
     console.log(nameValue, emailValue, passwordValue, cfPasswordValue);

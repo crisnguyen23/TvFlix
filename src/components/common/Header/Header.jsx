@@ -22,8 +22,8 @@ const Header = () => {
         setShowSearchBar(false);
       }
     };
-
     window.addEventListener("resize", setWindowDimensions);
+
     return () => {
       window.removeEventListener("resize", setWindowDimensions);
     };
